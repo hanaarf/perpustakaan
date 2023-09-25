@@ -15,10 +15,22 @@ foreach ($html->find('oai_dc:dc') as $t) {
     $language = addslashes($t->find('dc:language', 0)->innertext);
     $type = addslashes($t->find('dc:type', 0)->innertext);
     $identifiers = $t->find('dc:identifier');
-    $description = addslashes($t->find('dc:description', 0));
-    $coverage = addslashes($t->find('dc:coverage', 0));
-    $format = addslashes($t->find('dc:format', 0));
-    $image = addslashes($t->find('image', 0));
+    $description = '';
+    if ($t->find('dc:description', 0)) {
+        $description = addslashes($t->find('dc:description', 0)->innertext);
+    }
+    $coverage = '';
+    if ($t->find('dc:coverage', 0)) {
+        $coverage = addslashes($t->find('dc:coverage', 0)->innertext);
+    }
+    $format = '';
+    if ($t->find('dc:format', 0)) {
+        $format = addslashes($t->find('dc:format', 0)->innertext);
+    }
+    $image = '';
+    if ($t->find('image', 0)) {
+        $image = addslashes($t->find('image', 0)->innertext);
+    }
 
     $creator_values = array();
     foreach ($creators as $creator) {

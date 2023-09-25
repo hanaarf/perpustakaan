@@ -1,3 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+<div class="d-flex flex-row">
+    <button type="button" class="btn btn-primary ml-3 mt-2" data-toggle="modal" data-target="#exampleModal">
+        Import sql
+    </button>
+
+    <button type="button" class="btn btn-primary ml-3 mt-2" data-toggle="modal" data-target="#exampleModal1">
+        Import excel
+    </button>
+
+    <form action="http://localhost:8080/test/perpustakaan/admin/modules/bibliography/Aexportuser.php" method="post">
+                    <input type="submit" name="export_sql" value="Eksport User sql"
+                        class="btn btn-primary btn-lg active ml-3 mt-2">
+    </form>
+</div>
+
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <label for="file">test sql</label>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="http://localhost:8080/test/perpustakaan/admin/modules/bibliography/Aimportsql.php"
+                        method="post" enctype="multipart/form-data">
+                        <label for="file">Pilih File SQL:</label>
+                        <input type="file" name="file" id="file" accept=".sql"><br>
+                        <input type="submit" name="submit" value="Import" class="btn btn-primary">
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+   
+
+    <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="http://localhost:8080/test/perpustakaan/admin/modules/bibliography/Aimportexcel.php"
+                        method="POST" enctype="multipart/form-data">
+                        <input type="file" name="excel_file" accept=".xls, .xlsx" class="ml-3 mt-2">
+                        <input type="submit" name="submit" value="Import" class="btn btn-primary">
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <br>
+</body>
+
+</html>
+
+
 <?php
 
 
@@ -633,68 +722,107 @@ if (isset($_POST['saveData']) AND $can_read AND $can_write) {
 if (!$in_pop_up) {
     /* search form */
     ?>
-    <div class="menuBox">
-        <div class="menuBoxInner biblioIcon">
-            <div class="per_title">
-                <h2><?php echo __('Bibliographic'); ?></h2>
-                <!-- <a href="#" class="btn btn-primary btn-lg active" role="button" aria-pressed="true"  value="Export Excel" onclick="window.open('modules/bibliography/Apiexportiblio.php')"><?php echo __('Export buku'); ?></a> -->
+<div class="menuBox">
+    <div class="menuBoxInner biblioIcon">
+        <div class="per_title">
+            <h2><?php echo __('Bibliographic'); ?></h2>
+            <!-- <a href="#" class="btn btn-primary btn-lg active" role="button" aria-pressed="true"  value="Export Excel" onclick="window.open('modules/bibliography/Apiexportiblio.php')"><?php echo __('Export buku'); ?></a> -->
 
-                <br>
-                <a href="#" class="btn btn-primary btn-lg active" role="button" aria-pressed="true" onclick="window.open('modules/bibliography/Apisql.php')"><?php echo __('Export sql'); ?></a>
-            </div>
+            <br>
+            <div class="d-flex flex-row">
+                <a href="#" class="btn btn-primary btn-lg active" role="button" aria-pressed="true"
+                    onclick="window.open('modules/bibliography/Apisql.php')"><?php echo __('Export biblio sql'); ?></a>
+
             
-            <div class="sub_section">
-                <div class="btn-group">
-                    <a href="<?php echo MWB; ?>bibliography/index.php"
-                       class="btn btn-default"><?php echo __('Bibliographic List'); ?></a>
-                    <a href="<?php echo MWB; ?>bibliography/index.php?action=detail"
-                       class="btn btn-default"><?php echo __('Add New Bibliography'); ?></a>
-                </div>
-                <form name="search" action="<?php echo MWB; ?>bibliography/index.php" id="search" method="get"
-                      class="form-inline"><?php echo __('Search'); ?>
-                    <input type="text" name="keywords" id="keywords" class="form-control col-md-3"/>
-                    <select name="field" class="form-control col-md-2">
-                        <option value="0"><?php echo __('All Fields'); ?></option>
-                        <option value="title"><?php echo __('Title/Series Title'); ?> </option>
-                        <option value="subject"><?php echo __('Topics'); ?></option>
-                        <option value="author"><?php echo __('Authors'); ?></option>
-                        <option value="isbn"><?php echo __('ISBN/ISSN'); ?></option>
-                        <option value="publisher"><?php echo __('Publisher'); ?></option>
-                    </select>
-                    <input type="submit" id="doSearch" value="<?php echo __('Search'); ?>"
-                           class="s-btn btn btn-default"/>
-                    <div class="btn btn-info" data-toggle="collapse" data-target="#advancedFilter"
-                         aria-expanded="false"><?php echo __('Advanced Filter'); ?></div>
-                    <div class="collapse" id="advancedFilter"
-                         style="padding-top:10px;width:100%; text-align:left !important;">
-                        <?php echo __('Hide in OPAC'); ?>&nbsp;
-                        <select name="opac_hide" class="form-control col-md-2">
-                            <option value=""><?php echo __('ALL'); ?></option>
-                            <option value="0"><?php echo __('Show'); ?> </option>
-                            <option value="1"><?php echo __('Hide'); ?></option>
-                        </select>
-                        <?php echo __('Promote To Homepage'); ?>&nbsp;
-                        <select name="promoted" class="form-control col-md-2">
-                            <option value=""><?php echo __('ALL'); ?></option>
-                            <option value="0"><?php echo __('Don\'t Promote'); ?> </option>
-                            <option value="1"><?php echo __('Promote'); ?></option>
-                        </select>
+            </div>
+            <br>
+
+            <!-- Button trigger modal -->
+
+            <!-- Button trigger modal -->
+            <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                Import sql
+            </button>
+          
+
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <label for="file">test sql</label>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="http://localhost:8080/test/perpustakaan/admin/modules/bibliography/Aimportsql.php" method="post" enctype="multipart/form-data">
+                                <label for="file">Pilih File SQL:</label>
+                                <input type="file" name="file" id="file" accept=".sql"><br>
+                                <input type="submit" name="submit" value="Import" class="btn btn-primary">
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
                     </div>
-                    <?php
+                </div>
+            </div> -->
+
+        </div>
+
+        <div class="sub_section">
+            <div class="btn-group">
+                <a href="<?php echo MWB; ?>bibliography/index.php"
+                    class="btn btn-default"><?php echo __('Bibliographic List'); ?></a>
+                <a href="<?php echo MWB; ?>bibliography/index.php?action=detail"
+                    class="btn btn-default"><?php echo __('Add New Bibliography'); ?></a>
+            </div>
+            <form name="search" action="<?php echo MWB; ?>bibliography/index.php" id="search" method="get"
+                class="form-inline"><?php echo __('Search'); ?>
+                <input type="text" name="keywords" id="keywords" class="form-control col-md-3" />
+                <select name="field" class="form-control col-md-2">
+                    <option value="0"><?php echo __('All Fields'); ?></option>
+                    <option value="title"><?php echo __('Title/Series Title'); ?> </option>
+                    <option value="subject"><?php echo __('Topics'); ?></option>
+                    <option value="author"><?php echo __('Authors'); ?></option>
+                    <option value="isbn"><?php echo __('ISBN/ISSN'); ?></option>
+                    <option value="publisher"><?php echo __('Publisher'); ?></option>
+                </select>
+                <input type="submit" id="doSearch" value="<?php echo __('Search'); ?>" class="s-btn btn btn-default" />
+                <div class="btn btn-info" data-toggle="collapse" data-target="#advancedFilter" aria-expanded="false">
+                    <?php echo __('Advanced Filter'); ?></div>
+                <div class="collapse" id="advancedFilter"
+                    style="padding-top:10px;width:100%; text-align:left !important;">
+                    <?php echo __('Hide in OPAC'); ?>&nbsp;
+                    <select name="opac_hide" class="form-control col-md-2">
+                        <option value=""><?php echo __('ALL'); ?></option>
+                        <option value="0"><?php echo __('Show'); ?> </option>
+                        <option value="1"><?php echo __('Hide'); ?></option>
+                    </select>
+                    <?php echo __('Promote To Homepage'); ?>&nbsp;
+                    <select name="promoted" class="form-control col-md-2">
+                        <option value=""><?php echo __('ALL'); ?></option>
+                        <option value="0"><?php echo __('Don\'t Promote'); ?> </option>
+                        <option value="1"><?php echo __('Promote'); ?></option>
+                    </select>
+                </div>
+                <?php
                     // enable UCS?
                     if ($sysconf['ucs']['enable']) {
                         ?>
-                        <a href="#"
-                           onclick="ucsUpload('<?php echo MWB; ?>bibliography/ucs_upload.php', serializeChbox('dataList'))"
-                           class="s-btn btn btn-default notAJAX"><?php echo __('Upload Selected Bibliographic data to Union Catalog Server*'); ?></a>
-                        <?php
+                <a href="#"
+                    onclick="ucsUpload('<?php echo MWB; ?>bibliography/ucs_upload.php', serializeChbox('dataList'))"
+                    class="s-btn btn btn-default notAJAX"><?php echo __('Upload Selected Bibliographic data to Union Catalog Server*'); ?></a>
+                <?php
                     }
                     ?>
-                </form>
-            </div>
+            </form>
         </div>
     </div>
-    <?php
+</div>
+<?php
     /* search form end */
 }
 /* main content */
@@ -1208,43 +1336,47 @@ if (isset($_GET['action']) && $_GET['action'] == 'history') {
     echo $form->printOut();
     // javascript
     ?>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            // popup pattern
-            $('#class').change(function () {
-                $('#callNumber').val($(this).val().replace('NEW:', ''));
-            });
+<script type="text/javascript">
+    $(document).ready(function () {
+        // popup pattern
+        $('#class').change(function () {
+            $('#callNumber').val($(this).val().replace('NEW:', ''));
+        });
 
-            $('.removeImage').click(function (e) {
-                if (confirm('Are you sure you want to permanently remove this image?')) {
-                    return true;
-                } else {
-                    return false;
-                }
-            });
+        $('.removeImage').click(function (e) {
+            if (confirm('Are you sure you want to permanently remove this image?')) {
+                return true;
+            } else {
+                return false;
+            }
+        });
 
-            $(document).on('change', '.custom-file-input', function () {
-                // $('#imageFilename img').attr('src',document.getElementById("image").files[0].name);
-                var input = document.querySelector("#image");
-                var fReader = new FileReader();
-                fReader.readAsDataURL(input.files[0]);
-                fReader.onloadend = function (event) {
-                    var img = document.querySelector("#imageFilename img");
-                    img.src = event.target.result;
-                }
-                let fileName = $(this).val().replace(/\\/g, '/').replace(/.*\//, '');
-                $(this).parent('.custom-file').find('.custom-file-label').text(fileName);
-            });
+        $(document).on('change', '.custom-file-input', function () {
+            // $('#imageFilename img').attr('src',document.getElementById("image").files[0].name);
+            var input = document.querySelector("#image");
+            var fReader = new FileReader();
+            fReader.readAsDataURL(input.files[0]);
+            fReader.onloadend = function (event) {
+                var img = document.querySelector("#imageFilename img");
+                img.src = event.target.result;
+            }
+            let fileName = $(this).val().replace(/\\/g, '/').replace(/.*\//, '');
+            $(this).parent('.custom-file').find('.custom-file-label').text(fileName);
+        });
 
-            $('#getImage').click(function () {
-                $.post("<?php echo MWB ?>bibliography/scrape_image.php", {imageURL: $('#getUrl').val()})
-                    .done(function (data) {
-                        if (data.status == 'VALID') {
-                            $('#base64picstring').val(data.image);
-                            $('#imageFilename img').attr('src', data.message);
-                        } else {
-                            $('#base64picstring, #getUrl').val('');
-                            parent.toastr.error("<?php echo __('Current url is not valid or your internet is down.') ?>", "Bibliography Image", {
+        $('#getImage').click(function () {
+            $.post("<?php echo MWB ?>bibliography/scrape_image.php", {
+                    imageURL: $('#getUrl').val()
+                })
+                .done(function (data) {
+                    if (data.status == 'VALID') {
+                        $('#base64picstring').val(data.image);
+                        $('#imageFilename img').attr('src', data.message);
+                    } else {
+                        $('#base64picstring, #getUrl').val('');
+                        parent.toastr.error(
+                            "<?php echo __('Current url is not valid or your internet is down.') ?>",
+                            "Bibliography Image", {
                                 "closeButton": true,
                                 "debug": false,
                                 "newestOnTop": false,
@@ -1261,19 +1393,20 @@ if (isset($_GET['action']) && $_GET['action'] == 'history') {
                                 "showMethod": "fadeIn",
                                 "hideMethod": "fadeOut"
                             })
-                        }
-                    });
-            });
-
-            <?php
-            if (isset($js) && !empty($js))
-            {
-                echo $js;
-            }
-            ?>
+                    }
+                });
         });
-    </script>
-    <?php
+
+        <
+        ?
+        php
+        if (isset($js) && !empty($js)) {
+            echo $js;
+        } ?
+        >
+    });
+</script>
+<?php
 } else {
     # ADV LOG SYSTEM - STIIL EXPERIMENTAL
     $log = new AlLibrarian('1151', array("username" => $_SESSION['uname'], "uid" => $_SESSION['uid'], "realname" => $_SESSION['realname']));

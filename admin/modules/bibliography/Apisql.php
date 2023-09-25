@@ -14,11 +14,48 @@ $dataToExport = array();
 // Menambahkan data ke dalam array
 foreach ($html->find('oai_dc:dc') as $t) {
     $title = addslashes($t->find('dc:title', 0)->innertext);
-    $creator = addslashes($t->find('dc:creator', 0)->innertext);
-    $subject = addslashes($t->find('dc:subject', 0)->innertext);
-    $format = addslashes($t->find('dc:format', 0)->innertext);
+    $creators = $t->find('dc:creator');
+    $subjects = $t->find('dc:subject');
+    $publisher = addslashes($t->find('dc:publisher', 0)->innertext);
+    $date = addslashes($t->find('dc:date', 0)->innertext);
+    $language = addslashes($t->find('dc:language', 0)->innertext);
+    $type = addslashes($t->find('dc:type', 0)->innertext);
+    $identifiers = $t->find('dc:identifier');
+    $description = '';
+    if ($t->find('dc:description', 0)) {
+        $description = addslashes($t->find('dc:description', 0)->innertext);
+    }
+    $coverage = '';
+    if ($t->find('dc:coverage', 0)) {
+        $coverage = addslashes($t->find('dc:coverage', 0)->innertext);
+    }
+    $format = '';
+    if ($t->find('dc:format', 0)) {
+        $format = addslashes($t->find('dc:format', 0)->innertext);
+    }
+    $image = '';
+    if ($t->find('image', 0)) {
+        $image = addslashes($t->find('image', 0)->innertext);
+    }
 
-    $dataToExport[] = "INSERT INTO `biblio`(`biblio_id`, `gmd_id`, `title`, `sor`, `edition`, `isbn_issn`, `publisher_id`, `publish_year`, `collation`, `series_title`, `call_number`, `language_id`, `source`, `publish_place_id`, `classification`, `notes`, `image`, `file_att`, `opac_hide`, `promoted`, `labels`, `frequency_id`, `spec_detail_info`, `content_type_id`, `media_type_id`, `carrier_type_id`, `input_date`, `last_update`, `uid`) VALUES ('$title', '', '$title', '$creator', '', '', '', '', '', '', '', '', '', '', '', '$subject', '', '', '', '', '', '', '', '', '$format', '', '', '', '', '');";
+
+    
+    $creator_values = array();
+    foreach ($creators as $creator) {
+        $creator_values[] = addslashes($creator->innertext);
+    }
+
+    $subject_values = array();
+    foreach ($subjects as $subject) {
+        $subject_values[] = addslashes($subject->innertext);
+    }
+
+    $identifier_values = array();
+    foreach ($identifiers as $identifier) {
+        $identifier_values[] = addslashes($identifier->innertext);
+    }
+
+    $dataToExport[] = "INSERT INTO `biblio`(`title`,`creator`,`identifier`,`publisher`,`date`,`type`,`coverage`,`language`,`subject`,`format`) VALUES ('$title','" . implode(', ', $creator_values) . "', '" . implode(', ', $identifier_values) . "', '$publisher', '$date', '$type', '$coverage','$language','" . implode(', ', $subject_values) . "','$format');";
 }
 
 // ... Tambahkan pernyataan SQL lainnya ke $dataToExport sesuai kebutuhan
