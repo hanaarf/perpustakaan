@@ -1,6 +1,6 @@
-﻿<?php
+<?php
 // Sertakan file konfigurasi koneksi ke database
-include('backend/config.php');
+include('../backend/config.php');
 ?>
 
 <!DOCTYPE html>
@@ -23,10 +23,13 @@ include('backend/config.php');
 	<!-- Favicon icon -->
 
 	<link rel="stylesheet" href="vendor/chartist/css/chartist.min.css">
-	<link href="vendor/bootstrap-select/dist/css/bootstrap-select.min.css" rel="stylesheet">
-	<link href="vendor/owl-carousel/owl.carousel.css" rel="stylesheet">
-	<link href="css/style.css" rel="stylesheet">
+	<link href="../vendor/bootstrap-select/dist/css/bootstrap-select.min.css" rel="stylesheet">
+	<link href="../vendor/owl-carousel/owl.carousel.css" rel="stylesheet">
+	<link href="../css/style.css" rel="stylesheet">
 	<script src="https://d3js.org/d3.v6.min.js"></script>
+	<script src="https://d3js.org/d3.v7.min.js"></script>
+	<script src="https://unpkg.com/d3-simple-slider"></script>
+
 
 
 	<style>
@@ -81,13 +84,6 @@ include('backend/config.php');
 
 <body>
 
-	<!--*******************
-        Preloader start
-    ********************-->
-
-	<!--*******************
-        Preloader end
-    ********************-->
 
 	<!--**********************************
         Main wrapper start
@@ -99,8 +95,14 @@ include('backend/config.php');
         ***********************************-->
 		<div class="nav-header">
 			<a href="index.php" class="brand-logo">
-				<img src="images/brin.png" alt="" width="120px" style="margin-left: 47px;">
+				<img src="../images/brin.png" alt="" width="120px" style="margin-left: 47px;">
 			</a>
+
+			<div class="nav-control">
+                <div class="hamburger">
+                    <span class="line"></span><span class="line"></span><span class="line"></span>
+                </div>
+            </div>
 
 		</div>
 		<!--**********************************
@@ -168,19 +170,11 @@ include('backend/config.php');
 								</a>
 							</li>
 							<li class="nav-item dropdown header-profile">
-								<a class="nav-link" href="http://localhost:8080/test/perpustakaan/index.php?p=login"
-									role="button">
-									<div class="header-info">
-										<span>Login</span>
-									</div>
-								</a>
-							</li>
-							<!-- <li class="nav-item dropdown header-profile">
                                 <a class="nav-link" href="#" role="button" data-toggle="dropdown">
-                                    <img src="images/profile/pic1.jpg" width="20" alt="">
+                                    <img src="../images/profile/pic1.jpg" width="20" alt="">
 									<div class="header-info">
-										<span>Johndoe</span>
-										<small>Super Admin</small>
+										<span>admin</span>
+										<small>Super admin</small>
 									</div>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right">
@@ -192,12 +186,12 @@ include('backend/config.php');
                                         <svg id="icon-inbox" xmlns="http://www.w3.org/2000/svg" class="text-success" width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
                                         <span class="ml-2">Inbox </span>
                                     </a>
-                                    <a href="page-login.html" class="dropdown-item ai-icon">
+                                    <a href="localhost:8080/test/perpustakaan/admin/logout.php" class="dropdown-item ai-icon">
                                         <svg id="icon-logout" xmlns="http://www.w3.org/2000/svg" class="text-danger" width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
                                         <span class="ml-2">Logout </span>
                                     </a>
                                 </div>
-                            </li> -->
+                            </li>
 						</ul>
 					</div>
 				</nav>
@@ -211,7 +205,187 @@ include('backend/config.php');
 		<!--**********************************
             Sidebar start
         ***********************************-->
+		<div class="deznav">
+            <div class="deznav-scroll">
+				<!-- <div class="main-profile">
+					<div class="image-bx">
+						<img src="images/Untitled-1.jpg" alt="">
+						<a href="javascript:void(0);"><i class="fa fa-cog" aria-hidden="true"></i></a>
+					</div>
+					<h5 class="name"><span class="font-w400">Hello,</span> Marquez</h5>
+					<p class="email"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="95f8f4e7e4e0f0efefefefd5f8f4fcf9bbf6faf8">[email&#160;protected]</a></p>
+				</div> -->
+				<ul class="metismenu" id="menu">
+					<li class="nav-label first">Main Menu</li>
+                    <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+							<i class="flaticon-144-layout"></i>
+							<span class="nav-text">Dashboard</span>
+						</a>
+                        <ul aria-expanded="false">
+							<li><a href="index.html">Dashboard Light</a></li>
+							<li><a href="index-2.html">Dashboard Dark</a></li>
+							<li><a href="my-wallets.html">Wallet</a></li>
+							<li><a href="tranasactions.html">Transactions</a></li>
+							<li><a href="coin-details.html">Coin Details</a></li>
+							<li><a href="portofolio.html">Portofolio</a></li>
+							<li><a href="market-capital.html">Market Capital</a></li>
+						</ul>
 
+                    </li>
+					<li class="nav-label">Apps</li>
+                    <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+						<i class="flaticon-077-menu-1"></i>
+							<span class="nav-text">Apps</span>
+						</a>
+                        <ul aria-expanded="false">
+                            <li><a href="app-profile.html">Profile</a></li>
+							<li><a href="post-details.html">Post Details</a></li>
+							<li><a href="page-chat.html">Chat<span class="badge badge-xs badge-danger">New</span></a></li>
+							<li><a class="has-arrow" href="javascript:void(0);" aria-expanded="false">Project<span class="badge badge-xs badge-danger">New</span></a>
+                                <ul aria-expanded="false">
+                                    <li><a href="project-list.html">Project List</a></li>
+                                    <li><a href="project-card.html">Project Card</a></li>
+                                </ul>
+                            </li>
+							<li><a class="has-arrow" href="javascript:void(0);" aria-expanded="false">User<span class="badge badge-xs badge-danger">New</span></a>
+                                <ul aria-expanded="false">
+                                    <li><a href="user-list-datatable.html">User List</a></li>
+                                    <li><a href="user-list-column.html">User Card</a></li>
+                                </ul>
+                            </li>
+							<li><a class="has-arrow" href="javascript:void(0);" aria-expanded="false">Contact<span class="badge badge-xs badge-danger">New</span></a>
+                                <ul aria-expanded="false">
+                                    <li><a href="contact-list.html">Contact List</a></li>
+                                    <li><a href="contact-card.html">Contact Card</a></li>
+                                </ul>
+                            </li>
+                            <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">Email</a>
+                                <ul aria-expanded="false">
+                                    <li><a href="email-compose.html">Compose</a></li>
+                                    <li><a href="email-inbox.html">Inbox</a></li>
+                                    <li><a href="email-read.html">Read</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="app-calender.html">Calendar</a></li>
+							<li><a class="has-arrow" href="javascript:void()" aria-expanded="false">Shop</a>
+                                <ul aria-expanded="false">
+                                    <li><a href="ecom-product-grid.html">Product Grid</a></li>
+									<li><a href="ecom-product-list.html">Product List</a></li>
+									<li><a href="ecom-product-detail.html">Product Details</a></li>
+									<li><a href="ecom-product-order.html">Order</a></li>
+									<li><a href="ecom-checkout.html">Checkout</a></li>
+									<li><a href="ecom-invoice.html">Invoice</a></li>
+									<li><a href="ecom-customers.html">Customers</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+					
+                    <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+							<i class="flaticon-061-puzzle"></i>
+							<span class="nav-text">Charts</span>
+						</a>
+                        <ul aria-expanded="false">
+                            <li><a href="chart-flot.html">Flot</a></li>
+                            <li><a href="chart-morris.html">Morris</a></li>
+                            <li><a href="chart-chartjs.html">Chartjs</a></li>
+                            <li><a href="chart-chartist.html">Chartist</a></li>
+                            <li><a href="chart-sparkline.html">Sparkline</a></li>
+                            <li><a href="chart-peity.html">Peity</a></li>
+                        </ul>
+                    </li>
+					<li class="nav-label">components</li>
+                    <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+							<i class="flaticon-003-diamond"></i>
+							<span class="nav-text">Bootstrap</span>
+						</a>
+                        <ul aria-expanded="false">
+                            <li><a href="ui-accordion.html">Accordion</a></li>
+                            <li><a href="ui-alert.html">Alert</a></li>
+                            <li><a href="ui-badge.html">Badge</a></li>
+                            <li><a href="ui-button.html">Button</a></li>
+                            <li><a href="ui-modal.html">Modal</a></li>
+                            <li><a href="ui-button-group.html">Button Group</a></li>
+                            <li><a href="ui-list-group.html">List Group</a></li>
+                            <li><a href="ui-media-object.html">Media Object</a></li>
+                            <li><a href="ui-card.html">Cards</a></li>
+                            <li><a href="ui-carousel.html">Carousel</a></li>
+                            <li><a href="ui-dropdown.html">Dropdown</a></li>
+                            <li><a href="ui-popover.html">Popover</a></li>
+                            <li><a href="ui-progressbar.html">Progressbar</a></li>
+                            <li><a href="ui-tab.html">Tab</a></li>
+                            <li><a href="ui-typography.html">Typography</a></li>
+                            <li><a href="ui-pagination.html">Pagination</a></li>
+                            <li><a href="ui-grid.html">Grid</a></li>
+
+                        </ul>
+                    </li>
+                    <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+							<i class="flaticon-053-heart"></i>
+							<span class="nav-text">Plugins</span>
+						</a>
+                        <ul aria-expanded="false">
+                            <li><a href="uc-select2.html">Select 2</a></li>
+                            <li><a href="uc-nestable.html">Nestedable</a></li>
+                            <li><a href="uc-noui-slider.html">Noui Slider</a></li>
+                            <li><a href="uc-sweetalert.html">Sweet Alert</a></li>
+                            <li><a href="uc-toastr.html">Toastr</a></li>
+                            <li><a href="map-jqvmap.html">Jqv Map</a></li>
+							<li><a href="uc-lightgallery.html">Light Gallery</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="widget-basic.html" class="ai-icon" aria-expanded="false">
+							<i class="flaticon-381-settings-2"></i>
+							<span class="nav-text">Widget</span>
+						</a>
+					</li>
+                    <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+							<i class="flaticon-044-file"></i>
+							<span class="nav-text">Forms</span>
+						</a>
+                        <ul aria-expanded="false">
+                            <li><a href="form-element.html">Form Elements</a></li>
+                            <li><a href="form-wizard.html">Wizard</a></li>
+                            <li><a href="form-editor-summernote.html">Summernote</a></li>
+                            <li><a href="form-pickers.html">Pickers</a></li>
+                            <li><a href="form-validation-jquery.html">Jquery Validate</a></li>
+                        </ul>
+                    </li>
+                    <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+							<i class="flaticon-381-network"></i>
+							<span class="nav-text">Table</span>
+						</a>
+                        <ul aria-expanded="false">
+                            <li><a href="table-bootstrap-basic.html">Bootstrap</a></li>
+                            <li><a href="table-datatable-basic.html">Datatable</a></li>
+                        </ul>
+                    </li>
+                    <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+							<i class="flaticon-049-copy"></i>
+							<span class="nav-text">Pages</span>
+						</a>
+                        <ul aria-expanded="false">
+                            <li><a href="page-register.html">Register</a></li>
+                            <li><a href="page-login.html">Login</a></li>
+                            <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">Error</a>
+                                <ul aria-expanded="false">
+                                    <li><a href="page-error-400.html">Error 400</a></li>
+                                    <li><a href="page-error-403.html">Error 403</a></li>
+                                    <li><a href="page-error-404.html">Error 404</a></li>
+                                    <li><a href="page-error-500.html">Error 500</a></li>
+                                    <li><a href="page-error-503.html">Error 503</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="page-lock-screen.html">Lock Screen</a></li>
+                        </ul>
+                    </li>
+                </ul>
+				<div class="copyright">
+					<p><strong>Zenix Crypto Admin Dashboard</strong> © 2021 All Rights Reserved</p>
+					<p class="fs-12">Made with <span class="heart"></span> by DexignZone</p>
+				</div>
+			</div>
+        </div>
 		<!--**********************************
             Sidebar end
         ***********************************-->
@@ -219,22 +393,10 @@ include('backend/config.php');
 		<!--**********************************
             Content body start
         ***********************************-->
-		<div class="" style="margin-top: 100px; padding: 40px;">
+		<div class="content-body">
 			<div class="container-fluid">
-
-
 				<div class="form-head d-flex flex-wrap align-items-center">
 					<h3 class="font-w600 title mb-2 mr-auto ">Dashboard</h3>
-					<!-- <div class="weather-btn mb-2">
-						<span class="mr-3 font-w600 text-black"><i class="fa fa-cloud mr-2"></i>21</span>
-						<select class="form-control style-1 default-select  mr-3 ">
-							<option>Medan, IDN</option>
-							<option>Jakarta, IDN</option>
-							<option>Surabaya, IDN</option>
-						</select>
-					</div>
-					<a href="javascript:void(0);" class="btn btn-secondary mb-2"><i
-							class="las la-calendar scale5 mr-3"></i>Filter Periode</a> -->
 				</div>
 				<div class="row">
 					<div class="col-xl-3 col-sm-6 m-t35">
@@ -419,7 +581,7 @@ include('backend/config.php');
 														</button>
 													</div>
 													<div class="modal-body">
-														<form action="backend/importsql.php" method="post"
+														<form action="../backend/importsql.php" method="post"
 															enctype="multipart/form-data">
 															<label for="file">Pilih file SQL:</label>
 															<input type="file" name="file" id="file" accept=".sql"><br>
@@ -535,8 +697,6 @@ include('backend/config.php');
         Scripts
     ***********************************-->
 
-	<script src="https://d3js.org/d3.v7.min.js"></script>
-	<script src="https://unpkg.com/d3-simple-slider"></script>
 
 
 	<!-- script untuk horizontal -->
@@ -544,7 +704,7 @@ include('backend/config.php');
 		let horizontalChart = null; // Menyimpan referensi ke horizontal chart
 
 		// Fetch data from the backend
-		fetch('backend/piebiblio.php')
+		fetch('../backend/piebiblio.php')
 			.then(response => response.json())
 			.then(data => {
 				const pieChart = createPieChart(data);
@@ -772,7 +932,7 @@ include('backend/config.php');
 			bottom: 50,
 			left: 50
 		};
-		const width = 1200 - margin.left - margin.right;
+		const width = 1000 - margin.left - margin.right;
 		const height = 500 - margin.top - margin.bottom;
 
 		// Set up the x and y scales
@@ -828,7 +988,7 @@ include('backend/config.php');
 		let data; // Menyimpan data dari database
 
 		// menampilkan data tabel dari database
-		fetch('backend/grafik.php')
+		fetch('../backend/grafik.php')
 			.then(response => response.json())
 			.then(data => {
 				const dataDetails = data.details;
@@ -857,7 +1017,7 @@ include('backend/config.php');
 			});
 
 		// Load and process the data
-		d3.json("backend/grafik.php").then(jsonData => {
+		d3.json("../backend/grafik.php").then(jsonData => {
 			// Simpan data ke variabel global
 			data = jsonData.publish_year;
 
@@ -1076,174 +1236,21 @@ include('backend/config.php');
 			});
 		});
 	</script>
-
-	<!-- script untuk piechart biblio -->
-	<!-- <script>
-		fetch('backend/piebiblio.php')
-			.then(response => response.json())
-			.then(data => {
-				// Mengelompokkan data berdasarkan publisher_id
-				const groupedData = d3.group(data, d => d.publisher_id);
-
-				// Menghitung total count untuk setiap publisher_id
-				const combinedData = Array.from(groupedData, ([publisher_id, subData]) => ({
-					publisher_id,
-					count: d3.sum(subData, d => d.count)
-				}));
-
-				// Definisikan lebar dan tinggi SVG
-				var width = 200;
-				var height = 200;
-
-				// Buat SVG di dalam elemen dengan id "pie-chart"
-				var svg = d3.select("#pie-chart")
-					.append("svg")
-					.attr("width", width)
-					.attr("height", height)
-					.append("g")
-					.attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
-
-				// Definisikan skala warna
-				var color = d3.scaleOrdinal(d3.schemeCategory10);
-
-				// Buat pie chart
-				var pie = d3.pie().value(function (d) {
-					return d.count;
-				});
-
-				var arc = d3.arc()
-					.innerRadius(0)
-					.outerRadius(80);
-
-				var path = svg.selectAll("path")
-					.data(pie(combinedData))
-					.enter()
-					.append("path")
-					.attr("d", arc)
-					.attr("fill", function (d) {
-						return color(d.data.publisher_id);
-					});
-
-				// Tambahkan label dengan nama dan persentase di dalam pie chart
-				var label = svg.selectAll("text")
-					.data(pie(combinedData))
-					.enter()
-					.append("text")
-					.attr("transform", function (d) {
-						var pos = arc.centroid(d);
-						// Menggunakan trigonometri untuk menentukan posisi teks yang lebih akurat
-						var x = pos[0] * 0.85;
-						var y = pos[1] * 0.85;
-						return "translate(" + x + "," + y + ")";
-					})
-					.attr("dy", "0.35em")
-					.text(function (d) {
-						var percentage = ((d.data.count / d3.sum(combinedData, d => d.count)) * 100).toFixed(2);
-						return d.data.publisher_id + " (" + percentage + "%)";
-					})
-					.style("text-anchor", "middle");
-			})
-			.catch(error => console.error(error));
-	</script> -->
-
-	<!-- script iseng -->
-		<!-- <script>
-		var dataa = [
-			{ year: 1986, indexGain: 14.50, name: 'Book A' },
-			{ year: 1987, indexGain: 24.43, name: 'Book B' },
-			{ year: 1988, indexGain: 17.50, name: 'Book C' },
-			{ year: 1989, indexGain: 45.90, name: 'Book D' },
-		];
-
-		// Lebar dan tinggi diagram
-		var width = 990;
-		var height = 250;
-
-		// Margin
-		var margin = { top: 10, right: 10, bottom: 30, left: 40 };
-
-		// Buat SVG
-		var svg = d3.select('#horizontal-chart-container').append('svg')
-			.attr('width', width)
-			.attr('height', height)
-			.append('g')
-			.attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
-
-		// Skala X
-		var x = d3.scaleLinear()
-			.domain([d3.min(dataa, d => d.indexGain) - 5, d3.max(dataa, d => d.indexGain) + 5])
-			.range([0, width - margin.left - margin.right]);
-
-		// Skala Y
-		var y = d3.scaleBand()
-			.domain(dataa.map(d => d.year))
-			.range([0, height - margin.top - margin.bottom])
-			.padding(0.1);
-
-		// Buat sumbu X
-		svg.append('g')
-			.attr('class', 'axis x')
-			.attr('transform', 'translate(0,' + (height - margin.top - margin.bottom) + ')')
-			.call(d3.axisBottom(x));
-
-		// Buat sumbu Y
-		svg.append('g')
-			.attr('class', 'axis y')
-			.call(d3.axisLeft(y));
-
-		// Buat grid lines horizontal
-		svg.append('g')
-			.selectAll('line')
-			.data(y.domain())
-			.enter().append('line')
-			.attr('class', 'grid-line horizontal')
-			.attr('x1', 0)
-			.attr('x2', width - margin.left - margin.right)
-			.attr('y1', d => y(d) + y.bandwidth() / 2)
-			.attr('y2', d => y(d) + y.bandwidth() / 2);
-
-		// Buat bubble chart
-		var bubbles = svg.selectAll('.bubble')
-			.data(dataa)
-			.enter().append('g')
-			.attr('class', 'bubble')
-			.attr('transform', d => 'translate(' + x(d.indexGain) + ',' + y(d.year) + ')');
-
-		// Buat lingkaran untuk setiap data point
-		bubbles.append('circle')
-			.attr('class', 'bubble')
-			.attr('fill', '#ffffbf')
-			.attr('r', 20)
-			.attr('opacity', 1);
-
-		// Tambahkan teks ke dalam lingkaran
-		bubbles.append('text')
-			.attr('text-anchor', 'middle')
-			.attr('dy', '.3em')
-			.attr('opacity', 1)
-			.text(d => d.name);
-
-		// Tambahkan tooltip
-		bubbles.append('title')
-			.text(d => d.name + '\nYear: ' + d.year + '\nIndex Gain: ' + d.indexGain.toFixed(2) + '\n' + 'Fluctuation / Index Ratio: ' + (d.indexGain * 100 / d.year).toFixed(2) + '%');
-	</script> -->
-
-
 	
 
 
 	<!-- Required vendors -->
-	<script data-cfasync="false" src="../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
-	<script src="vendor/global/global.min.js"></script>
-	<script src="vendor/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+	<script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+	<script src="../vendor/global/global.min.js"></script>
+	<script src="../vendor/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
 
-	<script src="js/dashboard/dashboard-1.js"></script>
+	<script src="../js/dashboard/dashboard-1.js"></script>
 
-	<script src="vendor/owl-carousel/owl.carousel.js"></script>
-	<script src="js/custom.min.js"></script>
-	<script src="js/deznav-init.js"></script>
-	<script src="js/demo.js"></script>
-	<script src="js/styleSwitcher.js"></script>
+	<script src="../vendor/owl-carousel/owl.carousel.js"></script>
+	<script src="../js/custom.min.js"></script>
+	<script src="../js/deznav-init.js"></script>
+	<script src="../js/demo.js"></script>
+	<script src="../js/styleSwitcher.js"></script>
 
 </body>
 
