@@ -55,7 +55,7 @@ if ($sysconf['https_enable']) {
 
 // check if session browser cookie already exists
 if (isset($_COOKIE['admin_logged_in'])) {
-    redirect()->to('admin/index.php');
+    redirect()->to('http://localhost:8080/test/perpustakaan/dashboard/admin/');
 }
 
 if (isset($_GET['wrongpass'])) {
@@ -132,7 +132,7 @@ if (isset($_POST['logMeIn'])) {
             if ($sysconf['login_message']) utility::jsAlert(__('Welcome to Library Automation, ') . $logon->real_name);
 
             $logon->setupSession($dbs);
-            redirect('admin/index.php');
+            redirect('http://localhost:8080/test/perpustakaan/dashboard/admin/');
         }
     } else {
         // write log

@@ -20,7 +20,11 @@ while ($row_publish_year = $result_publish_year->fetch_assoc()) {
 }
 
 // Query SQL untuk mengambil data kolom "biblio_id," "title," dan "collation"
-$query_details = "SELECT biblio_id, title, collation, language_id, publish_year FROM biblio ORDER BY publish_year DESC";
+// $query_details = "SELECT biblio_id, title, publisher_id, language_id, publish_year FROM biblio ORDER BY publish_year DESC";
+$query_details = "SELECT b.biblio_id, b.title, b.publish_year, b.language_id, p.publisher_name
+                FROM biblio b
+                LEFT JOIN mst_publisher p ON b.publisher_id = p.publisher_id
+                ORDER BY b.publish_year DESC";
 $result_details = $conn->query($query_details);
 
 if (!$result_details) {

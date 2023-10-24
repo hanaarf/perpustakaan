@@ -99,10 +99,10 @@ include('../backend/config.php');
 			</a>
 
 			<div class="nav-control">
-                <div class="hamburger">
-                    <span class="line"></span><span class="line"></span><span class="line"></span>
-                </div>
-            </div>
+				<div class="hamburger">
+					<span class="line"></span><span class="line"></span><span class="line"></span>
+				</div>
+			</div>
 
 		</div>
 		<!--**********************************
@@ -170,28 +170,47 @@ include('../backend/config.php');
 								</a>
 							</li>
 							<li class="nav-item dropdown header-profile">
-                                <a class="nav-link" href="#" role="button" data-toggle="dropdown">
-                                    <img src="../images/profile/pic1.jpg" width="20" alt="">
+								<a class="nav-link" href="#" role="button" data-toggle="dropdown">
+									<img src="../images/profile/pic1.jpg" width="20" alt="">
 									<div class="header-info">
 										<span>admin</span>
 										<small>Super admin</small>
 									</div>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <a href="app-profile.html" class="dropdown-item ai-icon">
-                                        <svg id="icon-user1" xmlns="http://www.w3.org/2000/svg" class="text-primary" width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-                                        <span class="ml-2">Profile </span>
-                                    </a>
-                                    <a href="email-inbox.html" class="dropdown-item ai-icon">
-                                        <svg id="icon-inbox" xmlns="http://www.w3.org/2000/svg" class="text-success" width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                                        <span class="ml-2">Inbox </span>
-                                    </a>
-                                    <a href="localhost:8080/test/perpustakaan/admin/logout.php" class="dropdown-item ai-icon">
-                                        <svg id="icon-logout" xmlns="http://www.w3.org/2000/svg" class="text-danger" width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
-                                        <span class="ml-2">Logout </span>
-                                    </a>
-                                </div>
-                            </li>
+								</a>
+								<div class="dropdown-menu dropdown-menu-right">
+									<a href="app-profile.html" class="dropdown-item ai-icon">
+										<svg id="icon-user1" xmlns="http://www.w3.org/2000/svg" class="text-primary"
+											width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="currentColor"
+											stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+											<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+											<circle cx="12" cy="7" r="4"></circle>
+										</svg>
+										<span class="ml-2">Profile </span>
+									</a>
+									<a href="email-inbox.html" class="dropdown-item ai-icon">
+										<svg id="icon-inbox" xmlns="http://www.w3.org/2000/svg" class="text-success"
+											width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="currentColor"
+											stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+											<path
+												d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
+											</path>
+											<polyline points="22,6 12,13 2,6"></polyline>
+										</svg>
+										<span class="ml-2">Inbox </span>
+									</a>
+									<a href="localhost:8080/test/perpustakaan/admin/logout.php"
+										class="dropdown-item ai-icon">
+										<svg id="icon-logout" xmlns="http://www.w3.org/2000/svg" class="text-danger"
+											width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="currentColor"
+											stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+											<path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+											<polyline points="16 17 21 12 16 7"></polyline>
+											<line x1="21" y1="12" x2="9" y2="12"></line>
+										</svg>
+										<span class="ml-2">Logout </span>
+									</a>
+								</div>
+							</li>
 						</ul>
 					</div>
 				</nav>
@@ -206,7 +225,7 @@ include('../backend/config.php');
             Sidebar start
         ***********************************-->
 		<div class="deznav">
-            <div class="deznav-scroll">
+			<div class="deznav-scroll">
 				<!-- <div class="main-profile">
 					<div class="image-bx">
 						<img src="images/Untitled-1.jpg" alt="">
@@ -217,11 +236,11 @@ include('../backend/config.php');
 				</div> -->
 				<ul class="metismenu" id="menu">
 					<li class="nav-label first">Main Menu</li>
-                    <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+					<li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
 							<i class="flaticon-144-layout"></i>
 							<span class="nav-text">Dashboard</span>
 						</a>
-                        <ul aria-expanded="false">
+						<ul aria-expanded="false">
 							<li><a href="index.html">Dashboard Light</a></li>
 							<li><a href="index-2.html">Dashboard Dark</a></li>
 							<li><a href="my-wallets.html">Wallet</a></li>
@@ -231,70 +250,74 @@ include('../backend/config.php');
 							<li><a href="market-capital.html">Market Capital</a></li>
 						</ul>
 
-                    </li>
+					</li>
 					<li class="nav-label">Apps</li>
-                    <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-						<i class="flaticon-077-menu-1"></i>
+					<li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+							<i class="flaticon-077-menu-1"></i>
 							<span class="nav-text">Apps</span>
 						</a>
-                        <ul aria-expanded="false">
-                            <li><a href="app-profile.html">Profile</a></li>
+						<ul aria-expanded="false">
+							<li><a href="app-profile.html">Profile</a></li>
 							<li><a href="post-details.html">Post Details</a></li>
-							<li><a href="page-chat.html">Chat<span class="badge badge-xs badge-danger">New</span></a></li>
-							<li><a class="has-arrow" href="javascript:void(0);" aria-expanded="false">Project<span class="badge badge-xs badge-danger">New</span></a>
-                                <ul aria-expanded="false">
-                                    <li><a href="project-list.html">Project List</a></li>
-                                    <li><a href="project-card.html">Project Card</a></li>
-                                </ul>
-                            </li>
-							<li><a class="has-arrow" href="javascript:void(0);" aria-expanded="false">User<span class="badge badge-xs badge-danger">New</span></a>
-                                <ul aria-expanded="false">
-                                    <li><a href="user-list-datatable.html">User List</a></li>
-                                    <li><a href="user-list-column.html">User Card</a></li>
-                                </ul>
-                            </li>
-							<li><a class="has-arrow" href="javascript:void(0);" aria-expanded="false">Contact<span class="badge badge-xs badge-danger">New</span></a>
-                                <ul aria-expanded="false">
-                                    <li><a href="contact-list.html">Contact List</a></li>
-                                    <li><a href="contact-card.html">Contact Card</a></li>
-                                </ul>
-                            </li>
-                            <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">Email</a>
-                                <ul aria-expanded="false">
-                                    <li><a href="email-compose.html">Compose</a></li>
-                                    <li><a href="email-inbox.html">Inbox</a></li>
-                                    <li><a href="email-read.html">Read</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="app-calender.html">Calendar</a></li>
+							<li><a href="page-chat.html">Chat<span class="badge badge-xs badge-danger">New</span></a>
+							</li>
+							<li><a class="has-arrow" href="javascript:void(0);" aria-expanded="false">Project<span
+										class="badge badge-xs badge-danger">New</span></a>
+								<ul aria-expanded="false">
+									<li><a href="project-list.html">Project List</a></li>
+									<li><a href="project-card.html">Project Card</a></li>
+								</ul>
+							</li>
+							<li><a class="has-arrow" href="javascript:void(0);" aria-expanded="false">User<span
+										class="badge badge-xs badge-danger">New</span></a>
+								<ul aria-expanded="false">
+									<li><a href="user-list-datatable.html">User List</a></li>
+									<li><a href="user-list-column.html">User Card</a></li>
+								</ul>
+							</li>
+							<li><a class="has-arrow" href="javascript:void(0);" aria-expanded="false">Contact<span
+										class="badge badge-xs badge-danger">New</span></a>
+								<ul aria-expanded="false">
+									<li><a href="contact-list.html">Contact List</a></li>
+									<li><a href="contact-card.html">Contact Card</a></li>
+								</ul>
+							</li>
+							<li><a class="has-arrow" href="javascript:void()" aria-expanded="false">Email</a>
+								<ul aria-expanded="false">
+									<li><a href="email-compose.html">Compose</a></li>
+									<li><a href="email-inbox.html">Inbox</a></li>
+									<li><a href="email-read.html">Read</a></li>
+								</ul>
+							</li>
+							<li><a href="app-calender.html">Calendar</a></li>
 							<li><a class="has-arrow" href="javascript:void()" aria-expanded="false">Shop</a>
-                                <ul aria-expanded="false">
-                                    <li><a href="ecom-product-grid.html">Product Grid</a></li>
+								<ul aria-expanded="false">
+									<li><a href="ecom-product-grid.html">Product Grid</a></li>
 									<li><a href="ecom-product-list.html">Product List</a></li>
 									<li><a href="ecom-product-detail.html">Product Details</a></li>
 									<li><a href="ecom-product-order.html">Order</a></li>
 									<li><a href="ecom-checkout.html">Checkout</a></li>
 									<li><a href="ecom-invoice.html">Invoice</a></li>
 									<li><a href="ecom-customers.html">Customers</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-					
-                    <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+								</ul>
+							</li>
+						</ul>
+					</li>
+
+					<li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
 							<i class="flaticon-061-puzzle"></i>
 							<span class="nav-text">Charts</span>
 						</a>
-                        <ul aria-expanded="false">
-                            <li><a href="chart-flot.html">Flot</a></li>
-                            <li><a href="chart-morris.html">Morris</a></li>
-                            <li><a href="chart-chartjs.html">Chartjs</a></li>
-                            <li><a href="chart-chartist.html">Chartist</a></li>
-                            <li><a href="chart-sparkline.html">Sparkline</a></li>
-                            <li><a href="chart-peity.html">Peity</a></li>
-                        </ul>
-                    </li>
-					<li class="nav-label">components</li>
+						<ul aria-expanded="false">
+							<li><a href="chart-flot.html">Flot</a></li>
+							<li><a href="chart-morris.html">Morris</a></li>
+							<li><a href="chart-chartjs.html">Chartjs</a></li>
+							<li><a href="chart-chartist.html">Chartist</a></li>
+							<li><a href="chart-sparkline.html">Sparkline</a></li>
+							<li><a href="chart-peity.html">Peity</a></li>
+						</ul>
+					</li>
+					<!-- <li class="nav-label">components</li>
                     <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
 							<i class="flaticon-003-diamond"></i>
 							<span class="nav-text">Bootstrap</span>
@@ -378,14 +401,14 @@ include('../backend/config.php');
                             </li>
                             <li><a href="page-lock-screen.html">Lock Screen</a></li>
                         </ul>
-                    </li>
-                </ul>
-				<div class="copyright">
+                    </li> -->
+				</ul>
+				<!-- <div class="copyright">
 					<p><strong>Zenix Crypto Admin Dashboard</strong> © 2021 All Rights Reserved</p>
 					<p class="fs-12">Made with <span class="heart"></span> by DexignZone</p>
-				</div>
+				</div> -->
 			</div>
-        </div>
+		</div>
 		<!--**********************************
             Sidebar end
         ***********************************-->
@@ -541,36 +564,16 @@ include('../backend/config.php');
 						<div class="row">
 							<div class="col-xl-12 mt-2">
 								<div class="card">
-									<div class="tltp">
-
-									</div>
 									<div class="card-body">
-										<div id="horizontal-chart-container"></div>
-										<div id="pie-chart"></div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-xl-6 col-xxl-12">
-						<div class="row">
-							<div class="col-xl-12 mt-2">
-								<div class="card">
-									<div class="tltp">
-
-									</div>
-									<div class="card-header d-sm-flex d-block pb-0 border-0">
 										<div>
-											<h4 class="fs-20 text-black">grafik biblio</h4>
+											<h4 class="fs-20 text-black">Import & Export</h4>
 											<p class="mb-0 fs-12">Lorem ipsum dolor sit amet, consectetur</p>
 										</div>
-
+										<br>
 										<!-- import sql -->
-										<button type="button" class="btn btn-primary mb-2" data-toggle="modal"
+										<!-- <button type="button" class="btn btn-primary mb-2" data-toggle="modal"
 											data-target="#basicModal">Import sql
-										</button>
+										</button> -->
 										<div class="modal fade" id="basicModal">
 											<div class="modal-dialog" role="document">
 												<div class="modal-content">
@@ -599,9 +602,9 @@ include('../backend/config.php');
 
 
 										<!-- import excel -->
-										<button type="button" class="btn btn-primary mb-2" data-toggle="modal"
+										<!-- <button type="button" class="btn btn-primary mb-2" data-toggle="modal"
 											data-target="#basicModal1">Import excel
-										</button>
+										</button> -->
 										<div class="modal fade" id="basicModal1">
 											<div class="modal-dialog" role="document">
 												<div class="modal-content">
@@ -628,15 +631,45 @@ include('../backend/config.php');
 												</div>
 											</div>
 										</div>
-
-
-
-										<div class="d-flex flex-row">
-											<a href="http://localhost:8080/test/perpustakaan/admin/modules/bibliography/Apisql.php"
-												class="btn btn-primary mb-2" role="button" aria-pressed="true">Export
-												biblio</a>
+										<div class="d-flex mr-2">
+											<button type="button" class="btn btn-primary mb-2 mr-2" data-toggle="modal"
+												data-target="#basicModal">Import sql
+											</button>
+											<button type="button" class="btn btn-primary mb-2 mr-5" data-toggle="modal"
+												data-target="#basicModal1">Import excel
+											</button>
+											<div class="d-flex flex-row">
+												<a href="http://localhost:8080/test/perpustakaan/admin/modules/bibliography/Apisql.php"
+													class="btn btn-primary mb-2 mr-2" role="button"
+													aria-pressed="true">Export
+													sql</a>
+											</div>
+											<div class="d-flex flex-row">
+												<a href="exportexcel.php" class="btn btn-primary mb-2 mr-2" role="button"
+													aria-pressed="true">Export
+													excel</a>
+											</div>
+											<div class="d-flex flex-row">
+												<a href="exportcsv.php" class="btn btn-primary mb-2" role="button"
+													aria-pressed="true">Export
+													csv</a>
+											</div>
 										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-xl-12 mt-2">
+								<div class="card">
+									<div class="tltp">
 
+									</div>
+									<div class="card-header d-sm-flex d-block pb-0 border-0">
+										<div>
+											<h4 class="fs-20 text-black">grafik biblio</h4>
+											<p class="mb-0 fs-12">Lorem ipsum dolor sit amet, consectetur</p>
+										</div>
 									</div>
 									<div class="card-body">
 										<div id="chart-container"></div>
@@ -653,7 +686,7 @@ include('../backend/config.php');
 														<th class="dc-table-head">Id</th>
 														<th class="dc-table-head">Judul</th>
 														<th class="dc-table-head">Publish year</th>
-														<th class="dc-table-head">Halaman</th>
+														<th class="dc-table-head">Penerbit</th>
 														<th class="dc-table-head">Bahasa</th>
 													</tr>
 												</thead>
@@ -667,6 +700,24 @@ include('../backend/config.php');
 						</div>
 					</div>
 				</div>
+				<div class="row">
+					<div class="col-xl-6 col-xxl-12">
+						<div class="row">
+							<div class="col-xl-12 mt-2">
+								<div class="card">
+									<div class="tltp">
+
+									</div>
+									<div class="card-body">
+										<div id="horizontal-chart-container"></div>
+										<div id="pie-chart"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
 
 			</div>
 		</div>
@@ -759,24 +810,24 @@ include('../backend/config.php');
 				.attr("fill", d => color(d.data.publisher_id));
 
 			// Tambahkan label dengan nama dan persentase di dalam pie chart
-            const label = svg.selectAll("text")
-                .data(pie(combinedData))
-                .enter()
-                .append("text")
-                .attr("transform", d => {
-                    const pos = arc.centroid(d);
-                    const x = pos[0] * 0.85;
-                    const y = pos[1] * 0.85;
-                    return "translate(" + x + "," + y + ")";
-                })
-                .attr("dy", "0.35em")
-                .text(d => {
-                    const percentage = ((d.data.count / d3.sum(combinedData, d => d.count)) * 100);
-                    return d.data.publisher_id + " (" + percentage.toFixed(0) + "%)";
-                })
-                .style("text-anchor", "middle");
+			const label = svg.selectAll("text")
+				.data(pie(combinedData))
+				.enter()
+				.append("text")
+				.attr("transform", d => {
+					const pos = arc.centroid(d);
+					const x = pos[0] * 0.85;
+					const y = pos[1] * 0.85;
+					return "translate(" + x + "," + y + ")";
+				})
+				.attr("dy", "0.35em")
+				.text(d => {
+					const percentage = ((d.data.count / d3.sum(combinedData, d => d.count)) * 100);
+					return d.data.publisher_id + " (" + percentage.toFixed(0) + "%)";
+				})
+				.style("text-anchor", "middle");
 
-            return path; // Mengembalikan referensi ke pie chart
+			return path; // Mengembalikan referensi ke pie chart
 		}
 
 		function createHorizontalChart(data) {
@@ -1006,7 +1057,7 @@ include('../backend/config.php');
         <td>${entry.biblio_id}</td>
         <td>${entry.title}</td>
         <td>${entry.publish_year}</td>
-        <td>${entry.collation}</td>
+		<td>${entry.publisher_name}</td>
         <td>${entry.language_id}</td>
       `;
 					tableBody.appendChild(row);
@@ -1236,7 +1287,7 @@ include('../backend/config.php');
 			});
 		});
 	</script>
-	
+
 
 
 	<!-- Required vendors -->

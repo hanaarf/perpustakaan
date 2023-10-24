@@ -382,23 +382,6 @@ include('backend/config.php');
 									<div class="tltp">
 
 									</div>
-									<div class="card-body">
-										<div id="horizontal-chart-container"></div>
-										<div id="pie-chart"></div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-xl-6 col-xxl-12">
-						<div class="row">
-							<div class="col-xl-12 mt-2">
-								<div class="card">
-									<div class="tltp">
-
-									</div>
 									<div class="card-header d-sm-flex d-block pb-0 border-0">
 										<div>
 											<h4 class="fs-20 text-black">grafik biblio</h4>
@@ -406,9 +389,9 @@ include('backend/config.php');
 										</div>
 
 										<!-- import sql -->
-										<button type="button" class="btn btn-primary mb-2" data-toggle="modal"
+										<!-- <button type="button" class="btn btn-primary mb-2" data-toggle="modal"
 											data-target="#basicModal">Import sql
-										</button>
+										</button> -->
 										<div class="modal fade" id="basicModal">
 											<div class="modal-dialog" role="document">
 												<div class="modal-content">
@@ -437,9 +420,9 @@ include('backend/config.php');
 
 
 										<!-- import excel -->
-										<button type="button" class="btn btn-primary mb-2" data-toggle="modal"
+										<!-- <button type="button" class="btn btn-primary mb-2" data-toggle="modal"
 											data-target="#basicModal1">Import excel
-										</button>
+										</button> -->
 										<div class="modal fade" id="basicModal1">
 											<div class="modal-dialog" role="document">
 												<div class="modal-content">
@@ -469,16 +452,16 @@ include('backend/config.php');
 
 
 
-										<div class="d-flex flex-row">
+										<!-- <div class="d-flex flex-row">
 											<a href="http://localhost:8080/test/perpustakaan/admin/modules/bibliography/Apisql.php"
 												class="btn btn-primary mb-2" role="button" aria-pressed="true">Export
 												biblio</a>
-										</div>
+										</div> -->
 
 									</div>
 									<div class="card-body">
 										<div id="chart-container"></div>
-										<div id="slider-range"></div>
+										<!-- <div id="slider-range"></div> -->
 										<div class="row" style="padding: 10px;">
 											<div>
 												<div class="dc-data-count dc-chart">All records selected. Please click
@@ -505,6 +488,24 @@ include('backend/config.php');
 						</div>
 					</div>
 				</div>
+				<div class="row">
+					<div class="col-xl-6 col-xxl-12">
+						<div class="row">
+							<div class="col-xl-12 mt-2">
+								<div class="card">
+									<div class="tltp">
+
+									</div>
+									<div class="card-body">
+										<div id="horizontal-chart-container"></div>
+										<div id="pie-chart"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
 
 			</div>
 		</div>
