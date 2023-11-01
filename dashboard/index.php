@@ -462,624 +462,683 @@ include('backend/config.php');
 									<div class="card-body">
 										<div id="chart-container"></div>
 										<!-- <div id="slider-range"></div> -->
-										<div class="row" style="padding: 10px;">
+
+										<div class="row" style="padding: 30px;margin-top:15px;">
 											<div>
-												<div class="dc-data-count dc-chart">All records selected. Please click
-													on the graph to apply filters.
+												<div class="dc-data-count dc-chart">Top Penerbit
 												</div>
 											</div>
 											<table class="table table-hover dc-data-table dc-chart">
 												<thead>
 													<tr>
-														<th class="dc-table-head">Id</th>
-														<th class="dc-table-head">Judul</th>
-														<th class="dc-table-head">Publish year</th>
-														<th class="dc-table-head">Halaman</th>
-														<th class="dc-table-head">Bahasa</th>
+														<th class="dc-table-head">Nama</th>
+														<th class="dc-table-head">Jumlah</th>
+													</tr>
+												</thead>
+												<tbody id="data-table-body">
+												</tbody>
+											</table>
+
+											<script>
+												// Fungsi untuk mengambil data dari endpoint PHP dan mengisi tabel HTML
+												function populateTable() {
+													fetch('backend/toppenerbit.php') // Ganti 'url_ke_file_php.php' dengan URL ke file PHP Anda
+														.then(response => response.json())
+														.then(data => {
+															const tableBody = document.getElementById('data-table-body');
+
+															// Loop melalui data dan tambahkan baris ke dalam tabel
+															data.forEach(item => {
+																const row = document.createElement('tr');
+																const nameCell = document.createElement('td');
+																const jumlahCell = document.createElement('td');
+
+																nameCell.textContent = item.Name;
+																jumlahCell.textContent = item.Jumlah;
+
+																row.appendChild(nameCell);
+																row.appendChild(jumlahCell);
+
+																tableBody.appendChild(row);
+															});
+														})
+														.catch(error => console.error('Error:', error));
+												}
+
+												// Panggil fungsi untuk mengisi tabel saat halaman dimuat
+												populateTable();
+											</script>
+											<!-- <div class="row" style="padding: 10px;">
+											<div>
+												<div class="dc-data-count dc-chart">Top Penerbit
+												</div>
+											</div>
+											<table class="table table-hover dc-data-table dc-chart">
+												<thead>
+													<tr>
+														<th class="dc-table-head">Name</th>
+														<th class="dc-table-head">Jumlah</th>
 													</tr>
 												</thead>
 												<tbody id="data-table-body">
 												</tbody>
 											</table>
 										</div>
+										<div class="row" style="padding: 10px;">
+											<div>
+												<div class="dc-data-count dc-chart">Top Penerbit
+												</div>
+											</div>
+											<table class="table table-hover dc-data-table dc-chart">
+												<thead>
+													<tr>
+														<th class="dc-table-head">Name</th>
+														<th class="dc-table-head">Jumlah</th>
+													</tr>
+												</thead>
+												<tbody id="data-table-body">
+												</tbody>
+											</table>
+										</div>
+										</div> -->
+										</div>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-				<div class="row">
-					<div class="col-xl-6 col-xxl-12">
-						<div class="row">
-							<div class="col-xl-12 mt-2">
-								<div class="card">
-									<div class="tltp">
+					<div class="row">
+						<div class="col-xl-6 col-xxl-12">
+							<div class="row">
+								<div class="col-xl-12 mt-2">
+									<div class="card">
+										<div class="tltp">
 
-									</div>
-									<div class="card-body">
-										<div id="horizontal-chart-container"></div>
-										<div id="pie-chart"></div>
+										</div>
+										<div class="card-body">
+											<div id="horizontal-chart-container"></div>
+											<div id="pie-chart"></div>
+										</div>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
+
+
 				</div>
-
-
 			</div>
-		</div>
-		<!--**********************************
+			<!--**********************************
             Content body end
         ***********************************-->
 
-		<!--**********************************
+			<!--**********************************
             Footer start
         ***********************************-->
-		<div class="footer">
-			<div class="copyright">
-				<!-- <p>Copyright © Designed &amp; Developed by <a href="../index.php" target="_blank">DexignZone</a> 2021 -->
-				</p>
+			<div class="footer">
+				<div class="copyright">
+					<!-- <p>Copyright © Designed &amp; Developed by <a href="../index.php" target="_blank">DexignZone</a> 2021 -->
+					</p>
+				</div>
 			</div>
-		</div>
-		<!--**********************************
+			<!--**********************************
             Footer end
         ***********************************-->
 
 
-	</div>
-	<!--**********************************
+		</div>
+		<!--**********************************
         Main wrapper end
     ***********************************-->
 
-	<!--**********************************
+		<!--**********************************
         Scripts
     ***********************************-->
 
-	<script src="https://d3js.org/d3.v7.min.js"></script>
-	<script src="https://unpkg.com/d3-simple-slider"></script>
+		<script src="https://d3js.org/d3.v7.min.js"></script>
+		<script src="https://unpkg.com/d3-simple-slider"></script>
 
 
-	<!-- script untuk horizontal -->
-	<script>
-		let horizontalChart = null; // Menyimpan referensi ke horizontal chart
+		<!-- script untuk horizontal -->
+		<script>
+			let horizontalChart = null; // Menyimpan referensi ke horizontal chart
 
-		// Fetch data from the backend
-		fetch('backend/piebiblio.php')
-			.then(response => response.json())
-			.then(data => {
-				const pieChart = createPieChart(data);
-				createHorizontalChart(data);
+			// Fetch data from the backend
+			fetch('backend/piebiblio.php')
+				.then(response => response.json())
+				.then(data => {
+					const pieChart = createPieChart(data);
+					createHorizontalChart(data);
 
-				// Event listener for pie chart
-				pieChart.on('click', (event, d) => {
-					// Filter data for the selected publisher_id
-					const filteredData = data.filter(item => item.publisher_id === d.data.publisher_id);
-					updateHorizontalChart(filteredData);
-				});
-			})
-			.catch(error => console.error(error));
+					// Event listener for pie chart
+					pieChart.on('click', (event, d) => {
+						// Filter data for the selected publisher_id
+						const filteredData = data.filter(item => item.publisher_id === d.data.publisher_id);
+						updateHorizontalChart(filteredData);
+					});
+				})
+				.catch(error => console.error(error));
 
-		function createPieChart(data) {
-			// Definisi lebar dan tinggi SVG
-			const width = 200;
-			const height = 200;
+			function createPieChart(data) {
+				// Definisi lebar dan tinggi SVG
+				const width = 200;
+				const height = 200;
 
-			// Mengelompokkan data berdasarkan publisher_id
-			const groupedData = d3.group(data, d => d.publisher_id);
+				// Mengelompokkan data berdasarkan publisher_id
+				const groupedData = d3.group(data, d => d.publisher_id);
 
-			// Menghitung total count untuk setiap publisher_id
-			const combinedData = Array.from(groupedData, ([publisher_id, subData]) => ({
-				publisher_id,
-				count: d3.sum(subData, d => d.count)
-			}));
+				// Menghitung total count untuk setiap publisher_id
+				const combinedData = Array.from(groupedData, ([publisher_id, subData]) => ({
+					publisher_id,
+					count: d3.sum(subData, d => d.count)
+				}));
 
-			// Buat SVG di dalam elemen dengan id "pie-chart"
-			const svg = d3.select("#pie-chart")
+				// Buat SVG di dalam elemen dengan id "pie-chart"
+				const svg = d3.select("#pie-chart")
+					.append("svg")
+					.attr("width", width)
+					.attr("height", height)
+					.append("g")
+					.attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+
+				// Definisikan skala warna
+				const color = d3.scaleOrdinal(d3.schemeCategory10);
+
+				// Buat pie chart
+				const pie = d3.pie().value(d => d.count);
+
+				const arc = d3.arc()
+					.innerRadius(0)
+					.outerRadius(80);
+
+				const path = svg.selectAll("path")
+					.data(pie(combinedData))
+					.enter()
+					.append("path")
+					.attr("d", arc)
+					.attr("fill", d => color(d.data.publisher_id));
+
+				// Tambahkan label dengan nama dan persentase di dalam pie chart
+				const label = svg.selectAll("text")
+					.data(pie(combinedData))
+					.enter()
+					.append("text")
+					.attr("transform", d => {
+						const pos = arc.centroid(d);
+						const x = pos[0] * 0.85;
+						const y = pos[1] * 0.85;
+						return "translate(" + x + "," + y + ")";
+					})
+					.attr("dy", "0.35em")
+					.text(d => {
+						const percentage = ((d.data.count / d3.sum(combinedData, d => d.count)) * 100);
+						return d.data.publisher_id + " (" + percentage.toFixed(0) + "%)";
+					})
+					.style("text-anchor", "middle");
+
+				return path; // Mengembalikan referensi ke pie chart
+			}
+
+			function createHorizontalChart(data) {
+				const width = 990;
+				const height = 250;
+				const margin = {
+					top: 10,
+					right: 10,
+					bottom: 30,
+					left: 40
+				};
+				const svg = d3.select('#horizontal-chart-container').append('svg')
+					.attr('width', width)
+					.attr('height', height)
+					.append('g')
+					.attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
+
+				// Buat horizontal chart dengan data yang diberikan
+				const x = d3.scaleLinear()
+					.domain([0, d3.max(data, d => d.count)])
+					.range([0, width - margin.left - margin.right]);
+
+				const y = d3.scaleBand()
+					.domain(data.map(d => d.publish_year))
+					.range([0, height - margin.top - margin.bottom])
+					.padding(0.1);
+
+				svg.append('g')
+					.attr('class', 'axis x')
+					.attr('transform', 'translate(0,' + (height - margin.top - margin.bottom) + ')')
+					.call(d3.axisBottom(x));
+
+				svg.append('g')
+					.attr('class', 'axis y')
+					.call(d3.axisLeft(y));
+
+				svg.append('g')
+					.selectAll('line')
+					.data(y.domain())
+					.enter().append('line')
+					.attr('class', 'grid-line horizontal')
+					.attr('x1', 0)
+					.attr('x2', width - margin.left - margin.right)
+					.attr('y1', d => y(d) + y.bandwidth() / 2)
+					.attr('y2', d => y(d) + y.bandwidth() / 2);
+
+				const bubbles = svg.selectAll('.bubble')
+					.data(data)
+					.enter().append('g')
+					.attr('class', 'bubble')
+					.attr('transform', d => 'translate(0,' + x(d.publish_year) + ')');
+				// .attr('transform', d => 'translate(' + (width / 2) + ',' + y(d.publish_year) + ')');
+
+
+				bubbles.append('circle')
+					.attr('class', 'bubble')
+					.attr('fill', '#ffffbf')
+					.attr('r', 40)
+					.attr('opacity', 1);
+
+				bubbles.append('text')
+					.attr('text-anchor', 'middle')
+					.attr('dy', '.3em')
+					.attr('opacity', 1)
+					.text(d => d.title);
+
+				bubbles.append('title')
+					.text(d => d.title + '\nYear: ' + d.publish_year + '\nCount: ' + d.count);
+
+				return svg; // Mengembalikan referensi ke horizontal chart
+			}
+
+			function updateHorizontalChart(data) {
+				// Hapus horizontal chart yang ada sebelumnya
+				d3.select('#horizontal-chart-container').selectAll('svg').remove();
+
+				// Buat kembali horizontal chart dengan data yang telah difilter
+				const width = 990;
+				const height = 250;
+				const margin = {
+					top: 10,
+					right: 10,
+					bottom: 30,
+					left: 40
+				};
+				const svg = d3.select('#horizontal-chart-container').append('svg')
+					.attr('width', width)
+					.attr('height', height)
+					.append('g')
+					.attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
+
+				const x = d3.scaleLinear()
+					.domain([0, d3.max(data, d => d.count)])
+					.range([0, width - margin.left - margin.right]);
+
+				const y = d3.scaleBand()
+					.domain(data.map(d => d.publish_year))
+					.range([0, height - margin.top - margin.bottom])
+					.padding(0.1);
+
+				const centerX = (width - margin.left - margin.right) / 2; // Posisi tengah horizontal chart
+
+				svg.append('g')
+					.attr('class', 'axis x')
+					.attr('transform', 'translate(0,' + (height - margin.top - margin.bottom) + ')')
+					.call(d3.axisBottom(x));
+
+				svg.append('g')
+					.attr('class', 'axis y')
+					.call(d3.axisLeft(y));
+
+				svg.append('g')
+					.selectAll('line')
+					.data(y.domain())
+					.enter().append('line')
+					.attr('class', 'grid-line horizontal')
+					.attr('x1', 0)
+					.attr('x2', width - margin.left - margin.right)
+					.attr('y1', d => y(d) + y.bandwidth() / 2)
+					.attr('y2', d => y(d) + y.bandwidth() / 2);
+
+				const bubbles = svg.selectAll('.bubble')
+					.data(data)
+					.enter().append('g')
+					.attr('class', 'bubble')
+					.attr('transform', d => 'translate(' + centerX + ',' + (y(d.publish_year) + (y.bandwidth() / 2)) +
+						')'); // Posisi tengah-tengah
+
+				bubbles.append('circle')
+					.attr('class', 'bubble')
+					.attr('fill', '#ffffbf')
+					.attr('r', 40) // Ukuran bulatan
+					.attr('opacity', 1);
+
+				bubbles.append('text')
+					.attr('text-anchor', 'middle')
+					.attr('dy', '.3em')
+					.attr('opacity', 1)
+					.text(d => d.title);
+
+				bubbles.append('title')
+					.text(d => d.title + '\nYear: ' + d.publish_year + '\nCount: ' + d.count);
+
+			}
+		</script>
+
+		<!-- script untuk linechart biblio -->
+		<script>
+			// Set dimensions and margins for the chart
+			const margin = {
+				top: 70,
+				right: 60,
+				bottom: 50,
+				left: 50
+			};
+			const width = 1200 - margin.left - margin.right;
+			const height = 500 - margin.top - margin.bottom;
+
+			// Set up the x and y scales
+			const x = d3.scaleTime()
+				.range([0, width]);
+
+			const y = d3.scaleLinear()
+				.range([height, 0]);
+
+			// Create the SVG element and append it to the chart container
+			const svg = d3.select("#chart-container")
 				.append("svg")
-				.attr("width", width)
-				.attr("height", height)
+				.attr("width", width + margin.left + margin.right)
+				.attr("height", height + margin.top + margin.bottom)
 				.append("g")
-				.attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+				.attr("transform", `translate(${margin.left},${margin.top})`);
 
-			// Definisikan skala warna
-			const color = d3.scaleOrdinal(d3.schemeCategory10);
+			// create tooltip div
+			const tooltip = d3.select("body")
+				.append("div")
+				.attr("class", "tooltip");
 
-			// Buat pie chart
-			const pie = d3.pie().value(d => d.count);
+			// Create a second tooltip div for raw date
+			const tooltipRawDate = d3.select("body")
+				.append("div")
+				.attr("class", "tooltip");
 
-			const arc = d3.arc()
-				.innerRadius(0)
-				.outerRadius(80);
+			// Create our gradient  
+			const gradient = svg.append("defs")
+				.append("linearGradient")
+				.attr("id", "gradient")
+				.attr("x1", "0%")
+				.attr("x2", "0%")
+				.attr("y1", "0%")
+				.attr("y2", "100%")
+				.attr("spreadMethod", "pad");
 
-			const path = svg.selectAll("path")
-				.data(pie(combinedData))
-				.enter()
-				.append("path")
-				.attr("d", arc)
-				.attr("fill", d => color(d.data.publisher_id));
+			gradient.append("stop")
+				.attr("offset", "0%")
+				.attr("stop-color", "#1f77b4")
+				.attr("stop-opacity", 1);
 
-			// Tambahkan label dengan nama dan persentase di dalam pie chart
-            const label = svg.selectAll("text")
-                .data(pie(combinedData))
-                .enter()
-                .append("text")
-                .attr("transform", d => {
-                    const pos = arc.centroid(d);
-                    const x = pos[0] * 0.85;
-                    const y = pos[1] * 0.85;
-                    return "translate(" + x + "," + y + ")";
-                })
-                .attr("dy", "0.35em")
-                .text(d => {
-                    const percentage = ((d.data.count / d3.sum(combinedData, d => d.count)) * 100);
-                    return d.data.publisher_id + " (" + percentage.toFixed(0) + "%)";
-                })
-                .style("text-anchor", "middle");
+			gradient.append("stop")
+				.attr("offset", "100%")
+				.attr("stop-color", "#1f77b4")
+				.attr("stop-opacity", 0);
 
-            return path; // Mengembalikan referensi ke pie chart
-		}
+			// create a listening rectangle
+			const listeningRect = svg.append("rect")
+				.attr("width", width)
+				.attr("height", height);
 
-		function createHorizontalChart(data) {
-			const width = 990;
-			const height = 250;
-			const margin = {
-				top: 10,
-				right: 10,
-				bottom: 30,
-				left: 40
-			};
-			const svg = d3.select('#horizontal-chart-container').append('svg')
-				.attr('width', width)
-				.attr('height', height)
-				.append('g')
-				.attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
+			let data; // Menyimpan data dari database
 
-			// Buat horizontal chart dengan data yang diberikan
-			const x = d3.scaleLinear()
-				.domain([0, d3.max(data, d => d.count)])
-				.range([0, width - margin.left - margin.right]);
+			// menampilkan data tabel dari database
+			// 	fetch('backend/grafik.php')
+			// 		.then(response => response.json())
+			// 		.then(data => {
+			// 			const dataDetails = data.details;
+			// 			const tableBody = document.getElementById('data-table-body');
 
-			const y = d3.scaleBand()
-				.domain(data.map(d => d.publish_year))
-				.range([0, height - margin.top - margin.bottom])
-				.padding(0.1);
+			// 			// Hapus semua baris yang ada di dalam tabel
+			// 			while (tableBody.firstChild) {
+			// 				tableBody.removeChild(tableBody.firstChild);
+			// 			}
 
-			svg.append('g')
-				.attr('class', 'axis x')
-				.attr('transform', 'translate(0,' + (height - margin.top - margin.bottom) + ')')
-				.call(d3.axisBottom(x));
+			// 			// Loop melalui dataDetails dan tambahkan setiap entri ke dalam tabel
+			// 			dataDetails.forEach(entry => {
+			// 				const row = document.createElement('tr');
+			// 				row.innerHTML = `
+			//     <td>${entry.biblio_id}</td>
+			//     <td>${entry.title}</td>
+			//     <td>${entry.publish_year}</td>
+			//     <td>${entry.collation}</td>
+			//     <td>${entry.language_id}</td>
+			//   `;
+			// 				tableBody.appendChild(row);
+			// 			});
+			// 		})
+			// 		.catch(error => {
+			// 			console.error('Error:', error);
+			// 		});
 
-			svg.append('g')
-				.attr('class', 'axis y')
-				.call(d3.axisLeft(y));
+			// Load and process the data
+			d3.json("backend/grafik.php").then(jsonData => {
+				// Simpan data ke variabel global
+				data = jsonData.publish_year;
 
-			svg.append('g')
-				.selectAll('line')
-				.data(y.domain())
-				.enter().append('line')
-				.attr('class', 'grid-line horizontal')
-				.attr('x1', 0)
-				.attr('x2', width - margin.left - margin.right)
-				.attr('y1', d => y(d) + y.bandwidth() / 2)
-				.attr('y2', d => y(d) + y.bandwidth() / 2);
-
-			const bubbles = svg.selectAll('.bubble')
-				.data(data)
-				.enter().append('g')
-				.attr('class', 'bubble')
-				.attr('transform', d => 'translate(0,' + x(d.publish_year) + ')');
-			// .attr('transform', d => 'translate(' + (width / 2) + ',' + y(d.publish_year) + ')');
-
-
-			bubbles.append('circle')
-				.attr('class', 'bubble')
-				.attr('fill', '#ffffbf')
-				.attr('r', 40)
-				.attr('opacity', 1);
-
-			bubbles.append('text')
-				.attr('text-anchor', 'middle')
-				.attr('dy', '.3em')
-				.attr('opacity', 1)
-				.text(d => d.title);
-
-			bubbles.append('title')
-				.text(d => d.title + '\nYear: ' + d.publish_year + '\nCount: ' + d.count);
-
-			return svg; // Mengembalikan referensi ke horizontal chart
-		}
-
-		function updateHorizontalChart(data) {
-			// Hapus horizontal chart yang ada sebelumnya
-			d3.select('#horizontal-chart-container').selectAll('svg').remove();
-
-			// Buat kembali horizontal chart dengan data yang telah difilter
-			const width = 990;
-			const height = 250;
-			const margin = {
-				top: 10,
-				right: 10,
-				bottom: 30,
-				left: 40
-			};
-			const svg = d3.select('#horizontal-chart-container').append('svg')
-				.attr('width', width)
-				.attr('height', height)
-				.append('g')
-				.attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
-
-			const x = d3.scaleLinear()
-				.domain([0, d3.max(data, d => d.count)])
-				.range([0, width - margin.left - margin.right]);
-
-			const y = d3.scaleBand()
-				.domain(data.map(d => d.publish_year))
-				.range([0, height - margin.top - margin.bottom])
-				.padding(0.1);
-
-			const centerX = (width - margin.left - margin.right) / 2; // Posisi tengah horizontal chart
-
-			svg.append('g')
-				.attr('class', 'axis x')
-				.attr('transform', 'translate(0,' + (height - margin.top - margin.bottom) + ')')
-				.call(d3.axisBottom(x));
-
-			svg.append('g')
-				.attr('class', 'axis y')
-				.call(d3.axisLeft(y));
-
-			svg.append('g')
-				.selectAll('line')
-				.data(y.domain())
-				.enter().append('line')
-				.attr('class', 'grid-line horizontal')
-				.attr('x1', 0)
-				.attr('x2', width - margin.left - margin.right)
-				.attr('y1', d => y(d) + y.bandwidth() / 2)
-				.attr('y2', d => y(d) + y.bandwidth() / 2);
-
-			const bubbles = svg.selectAll('.bubble')
-				.data(data)
-				.enter().append('g')
-				.attr('class', 'bubble')
-				.attr('transform', d => 'translate(' + centerX + ',' + (y(d.publish_year) + (y.bandwidth() / 2)) +
-					')'); // Posisi tengah-tengah
-
-			bubbles.append('circle')
-				.attr('class', 'bubble')
-				.attr('fill', '#ffffbf')
-				.attr('r', 40) // Ukuran bulatan
-				.attr('opacity', 1);
-
-			bubbles.append('text')
-				.attr('text-anchor', 'middle')
-				.attr('dy', '.3em')
-				.attr('opacity', 1)
-				.text(d => d.title);
-
-			bubbles.append('title')
-				.text(d => d.title + '\nYear: ' + d.publish_year + '\nCount: ' + d.count);
-
-		}
-	</script>
-
-	<!-- script untuk linechart biblio -->
-	<script>
-		// Set dimensions and margins for the chart
-		const margin = {
-			top: 70,
-			right: 60,
-			bottom: 50,
-			left: 50
-		};
-		const width = 1200 - margin.left - margin.right;
-		const height = 500 - margin.top - margin.bottom;
-
-		// Set up the x and y scales
-		const x = d3.scaleTime()
-			.range([0, width]);
-
-		const y = d3.scaleLinear()
-			.range([height, 0]);
-
-		// Create the SVG element and append it to the chart container
-		const svg = d3.select("#chart-container")
-			.append("svg")
-			.attr("width", width + margin.left + margin.right)
-			.attr("height", height + margin.top + margin.bottom)
-			.append("g")
-			.attr("transform", `translate(${margin.left},${margin.top})`);
-
-		// create tooltip div
-		const tooltip = d3.select("body")
-			.append("div")
-			.attr("class", "tooltip");
-
-		// Create a second tooltip div for raw date
-		const tooltipRawDate = d3.select("body")
-			.append("div")
-			.attr("class", "tooltip");
-
-		// Create our gradient  
-		const gradient = svg.append("defs")
-			.append("linearGradient")
-			.attr("id", "gradient")
-			.attr("x1", "0%")
-			.attr("x2", "0%")
-			.attr("y1", "0%")
-			.attr("y2", "100%")
-			.attr("spreadMethod", "pad");
-
-		gradient.append("stop")
-			.attr("offset", "0%")
-			.attr("stop-color", "#1f77b4")
-			.attr("stop-opacity", 1);
-
-		gradient.append("stop")
-			.attr("offset", "100%")
-			.attr("stop-color", "#1f77b4")
-			.attr("stop-opacity", 0);
-
-		// create a listening rectangle
-		const listeningRect = svg.append("rect")
-			.attr("width", width)
-			.attr("height", height);
-
-		let data; // Menyimpan data dari database
-
-		// menampilkan data tabel dari database
-		fetch('backend/grafik.php')
-			.then(response => response.json())
-			.then(data => {
-				const dataDetails = data.details;
-				const tableBody = document.getElementById('data-table-body');
-
-				// Hapus semua baris yang ada di dalam tabel
-				while (tableBody.firstChild) {
-					tableBody.removeChild(tableBody.firstChild);
-				}
-
-				// Loop melalui dataDetails dan tambahkan setiap entri ke dalam tabel
-				dataDetails.forEach(entry => {
-					const row = document.createElement('tr');
-					row.innerHTML = `
-        <td>${entry.biblio_id}</td>
-        <td>${entry.title}</td>
-        <td>${entry.publish_year}</td>
-        <td>${entry.collation}</td>
-        <td>${entry.language_id}</td>
-      `;
-					tableBody.appendChild(row);
+				// Parse the Date and convert the Close to a number
+				data.forEach(d => {
+					d.publish_year = new Date(d.publish_year);
+					d.total = +d.total;
 				});
-			})
-			.catch(error => {
-				console.error('Error:', error);
-			});
 
-		// Load and process the data
-		d3.json("backend/grafik.php").then(jsonData => {
-			// Simpan data ke variabel global
-			data = jsonData.publish_year;
+				// Set the domains for the x and y scales
+				x.domain(d3.extent(data, d => d.publish_year));
+				y.domain([0, d3.max(data, d => d.total)]);
 
-			// Parse the Date and convert the Close to a number
-			data.forEach(d => {
-				d.publish_year = new Date(d.publish_year);
-				d.total = +d.total;
-			});
-
-			// Set the domains for the x and y scales
-			x.domain(d3.extent(data, d => d.publish_year));
-			y.domain([0, d3.max(data, d => d.total)]);
-
-			svg.append("g")
-				.attr("class", "x-axis")
-				.attr("transform", `translate(0,${height})`)
-				.style("font-size", "14px")
-				.call(d3.axisBottom(x)
-					.tickFormat(d3.timeFormat("%Y")))
-				.selectAll(".tick line")
-				.style("stroke-opacity", 1);
-
-			svg.selectAll(".tick text")
-				.attr("fill", "#777");
-
-			// Add the y-axis
-			svg.append("g")
-				.attr("class", "y-axis")
-				.attr("transform", `translate(${width},0)`)
-				.style("font-size", "14px")
-				.call(d3.axisRight(y)
-					.ticks(10)
-					.tickFormat(d3.format("d")))
-				.selectAll(".tick text")
-				.style("fill", "#777");
-
-			// Set up the line generator
-			const line = d3.line()
-				.x(d => x(d.publish_year))
-				.y(d => y(d.total));
-
-			// Create an area generator
-			const area = d3.area()
-				.x(d => x(d.publish_year))
-				.y0(height)
-				.y1(d => y(d.total));
-
-			// Add the area path
-			svg.append("path")
-				.datum(data)
-				.attr("class", "area")
-				.attr("d", area)
-				.style("fill", "url(#gradient)")
-				.style("opacity", .5);
-
-			// Add the line path
-			const path = svg.append("path")
-				.datum(data)
-				.attr("class", "line")
-				.attr("fill", "none")
-				.attr("stroke", "#1f77b4")
-				.attr("stroke-width", 1)
-				.attr("d", line);
-
-			// Add a circle element
-			const circle = svg.append("circle")
-				.attr("r", 0)
-				.attr("fill", "red")
-				.style("stroke", "white")
-				.attr("opacity", 0.7)
-				.style("pointer-events", "none");
-
-			// Add red lines extending from the circle to the date and value
-			const tooltipLineX = svg.append("line")
-				.attr("class", "tooltip-line")
-				.attr("id", "tooltip-line-x")
-				.attr("stroke", "red")
-				.attr("stroke-width", 1)
-				.attr("stroke-dasharray", "2,2");
-
-			const tooltipLineY = svg.append("line")
-				.attr("class", "tooltip-line")
-				.attr("id", "tooltip-line-y")
-				.attr("stroke", "red")
-				.attr("stroke-width", 1)
-				.attr("stroke-dasharray", "2,2");
-
-			// create the mouse move function
-			listeningRect.on("mousemove", function (event) {
-				const [xCoord] = d3.pointer(event, this);
-				const bisectDate = d3.bisector(d => d.publish_year).left;
-				const x0 = x.invert(xCoord);
-				const i = bisectDate(data, x0, 1);
-				const d0 = data[i - 1];
-				const d1 = data[i];
-				const d = x0 - d0.publish_year > d1.publish_year - x0 ? d1 : d0;
-				const xPos = x(d.publish_year);
-				const yPos = y(d.total);
-
-				// Update the circle position
-				circle.attr("cx", xPos).attr("cy", yPos);
-
-				// Add transition for the circle radius
-				circle.transition()
-					.duration(50)
-					.attr("r", 5);
-
-				// Update the position of the red lines
-				tooltipLineX.style("display", "block").attr("x1", xPos).attr("x2", xPos).attr("y1", 0)
-					.attr("y2", height);
-				tooltipLineY.style("display", "block").attr("y1", yPos).attr("y2", yPos).attr("x1", 0)
-					.attr("x2", width);
-
-				// add in our tooltip
-				tooltip
-					.style("display", "block")
-					.style("left", `${width + 90}px`)
-					.style("top", `${yPos + 68}px`)
-					.html(`${d.total !== undefined ? d.total : 'N/A'}`);
-
-				tooltipRawDate
-					.style("display", "block")
-					.style("left", `${xPos + 60}px`)
-					.style("top", `${height + 53}px`)
-					.html(
-						`${d.publish_year !== undefined ? d.publish_year.toISOString().slice(0, 10) : 'N/A'}`
-					);
-			});
-
-			// listening rectangle mouse leave function
-			listeningRect.on("mouseleave", function () {
-				circle.transition().duration(50).attr("r", 0);
-				tooltip.style("display", "none");
-				tooltipRawDate.style("display", "none");
-				tooltipLineX.attr("x1", 0).attr("x2", 0);
-				tooltipLineY.attr("y1", 0).attr("y2", 0);
-				tooltipLineX.style("display", "none");
-				tooltipLineY.style("display", "none");
-			});
-
-			// Define the slider
-			const sliderRange = d3
-				.sliderBottom()
-				.min(d3.min(data, d => d.publish_year))
-				.max(d3.max(data, d => d.publish_year))
-				.width(300)
-				.tickFormat(d3.timeFormat('%Y-%m-%d'))
-				.ticks(3)
-				.default([d3.min(data, d => d.publish_year), d3.max(data, d => d.publish_year)])
-				.fill('#1f77b4');
-
-			// Add the slider to the DOM
-			const gRange = d3
-				.select('#slider-range')
-				.append('svg')
-				.attr('width', 1000)
-				.attr('height', 100)
-				.append('g')
-				.attr('transform', 'translate(90,30)');
-
-			gRange.call(sliderRange);
-
-			// Filter data based on the initial slider values
-			const initialFilteredData = data.filter(d => d.publish_year >= sliderRange.value()[0] && d
-				.publish_year <= sliderRange.value()[1]);
-
-
-			// Handle slider change event
-			sliderRange.on('onchange', val => {
-				// Filter data based on slider values
-				const filteredData = data.filter(d => d.publish_year >= val[0] && d.publish_year <= val[1]);
-
-				// Update domain for x-axis with selected years
-				x.domain([val[0], val[1]]);
-
-				// Update the chart with the filtered data
-				svg.select(".line")
-					.datum(filteredData)
-					.attr("d", line);
-
-				svg.select(".area")
-					.datum(filteredData)
-					.attr("d", area);
-
-				// Update the y-axis domain based on the filtered data
-				y.domain([0, d3.max(filteredData, d => d.total)]);
-
-				// Update x-axis with the new domain
-				svg.select(".x-axis")
-					.transition()
-					.duration(300)
+				svg.append("g")
+					.attr("class", "x-axis")
+					.attr("transform", `translate(0,${height})`)
+					.style("font-size", "14px")
 					.call(d3.axisBottom(x)
-						.tickFormat(d3.timeFormat("%Y")));
+						.tickFormat(d3.timeFormat("%Y")))
+					.selectAll(".tick line")
+					.style("stroke-opacity", 1);
 
-				// Update y-axis with the new domain
-				svg.select(".y-axis")
-					.transition()
-					.duration(300)
+				svg.selectAll(".tick text")
+					.attr("fill", "#777");
+
+				// Add the y-axis
+				svg.append("g")
+					.attr("class", "y-axis")
+					.attr("transform", `translate(${width},0)`)
+					.style("font-size", "14px")
 					.call(d3.axisRight(y)
 						.ticks(10)
-						.tickFormat(d => {
-							if (d <= 0) return "";
-							return d3.format("d")(d);
-						}));
+						.tickFormat(d3.format("d")))
+					.selectAll(".tick text")
+					.style("fill", "#777");
 
-				// Update the table data when the slider changes
-				const tableRows = document.querySelectorAll('#data-table-body tr');
-				tableRows.forEach(row => {
-					const publishYear = new Date(row.querySelector('td:nth-child(3)').textContent);
-					if (publishYear >= val[0] && publishYear <= val[1]) {
-						row.style.display = "table-row"; // Show rows within the selected range
-					} else {
-						row.style.display = "none"; // Hide rows outside the selected range
-					}
+				// Set up the line generator
+				const line = d3.line()
+					.x(d => x(d.publish_year))
+					.y(d => y(d.total));
+
+				// Create an area generator
+				const area = d3.area()
+					.x(d => x(d.publish_year))
+					.y0(height)
+					.y1(d => y(d.total));
+
+				// Add the area path
+				svg.append("path")
+					.datum(data)
+					.attr("class", "area")
+					.attr("d", area)
+					.style("fill", "url(#gradient)")
+					.style("opacity", .5);
+
+				// Add the line path
+				const path = svg.append("path")
+					.datum(data)
+					.attr("class", "line")
+					.attr("fill", "none")
+					.attr("stroke", "#1f77b4")
+					.attr("stroke-width", 1)
+					.attr("d", line);
+
+				// Add a circle element
+				const circle = svg.append("circle")
+					.attr("r", 0)
+					.attr("fill", "red")
+					.style("stroke", "white")
+					.attr("opacity", 0.7)
+					.style("pointer-events", "none");
+
+				// Add red lines extending from the circle to the date and value
+				const tooltipLineX = svg.append("line")
+					.attr("class", "tooltip-line")
+					.attr("id", "tooltip-line-x")
+					.attr("stroke", "red")
+					.attr("stroke-width", 1)
+					.attr("stroke-dasharray", "2,2");
+
+				const tooltipLineY = svg.append("line")
+					.attr("class", "tooltip-line")
+					.attr("id", "tooltip-line-y")
+					.attr("stroke", "red")
+					.attr("stroke-width", 1)
+					.attr("stroke-dasharray", "2,2");
+
+				// create the mouse move function
+				listeningRect.on("mousemove", function (event) {
+					const [xCoord] = d3.pointer(event, this);
+					const bisectDate = d3.bisector(d => d.publish_year).left;
+					const x0 = x.invert(xCoord);
+					const i = bisectDate(data, x0, 1);
+					const d0 = data[i - 1];
+					const d1 = data[i];
+					const d = x0 - d0.publish_year > d1.publish_year - x0 ? d1 : d0;
+					const xPos = x(d.publish_year);
+					const yPos = y(d.total);
+
+					// Update the circle position
+					circle.attr("cx", xPos).attr("cy", yPos);
+
+					// Add transition for the circle radius
+					circle.transition()
+						.duration(50)
+						.attr("r", 5);
+
+					// Update the position of the red lines
+					tooltipLineX.style("display", "block").attr("x1", xPos).attr("x2", xPos).attr("y1", 0)
+						.attr("y2", height);
+					tooltipLineY.style("display", "block").attr("y1", yPos).attr("y2", yPos).attr("x1", 0)
+						.attr("x2", width);
+
+					// add in our tooltip
+					tooltip
+						.style("display", "block")
+						.style("left", `${width + 90}px`)
+						.style("top", `${yPos + 68}px`)
+						.html(`${d.total !== undefined ? d.total : 'N/A'}`);
+
+					tooltipRawDate
+						.style("display", "block")
+						.style("left", `${xPos + 60}px`)
+						.style("top", `${height + 53}px`)
+						.html(
+							`${d.publish_year !== undefined ? d.publish_year.toISOString().slice(0, 10) : 'N/A'}`
+						);
+				});
+
+				// listening rectangle mouse leave function
+				listeningRect.on("mouseleave", function () {
+					circle.transition().duration(50).attr("r", 0);
+					tooltip.style("display", "none");
+					tooltipRawDate.style("display", "none");
+					tooltipLineX.attr("x1", 0).attr("x2", 0);
+					tooltipLineY.attr("y1", 0).attr("y2", 0);
+					tooltipLineX.style("display", "none");
+					tooltipLineY.style("display", "none");
+				});
+
+				// Define the slider
+				const sliderRange = d3
+					.sliderBottom()
+					.min(d3.min(data, d => d.publish_year))
+					.max(d3.max(data, d => d.publish_year))
+					.width(300)
+					.tickFormat(d3.timeFormat('%Y-%m-%d'))
+					.ticks(3)
+					.default([d3.min(data, d => d.publish_year), d3.max(data, d => d.publish_year)])
+					.fill('#1f77b4');
+
+				// Add the slider to the DOM
+				const gRange = d3
+					.select('#slider-range')
+					.append('svg')
+					.attr('width', 1000)
+					.attr('height', 100)
+					.append('g')
+					.attr('transform', 'translate(90,30)');
+
+				gRange.call(sliderRange);
+
+				// Filter data based on the initial slider values
+				const initialFilteredData = data.filter(d => d.publish_year >= sliderRange.value()[0] && d
+					.publish_year <= sliderRange.value()[1]);
+
+
+				// Handle slider change event
+				sliderRange.on('onchange', val => {
+					// Filter data based on slider values
+					const filteredData = data.filter(d => d.publish_year >= val[0] && d.publish_year <= val[1]);
+
+					// Update domain for x-axis with selected years
+					x.domain([val[0], val[1]]);
+
+					// Update the chart with the filtered data
+					svg.select(".line")
+						.datum(filteredData)
+						.attr("d", line);
+
+					svg.select(".area")
+						.datum(filteredData)
+						.attr("d", area);
+
+					// Update the y-axis domain based on the filtered data
+					y.domain([0, d3.max(filteredData, d => d.total)]);
+
+					// Update x-axis with the new domain
+					svg.select(".x-axis")
+						.transition()
+						.duration(300)
+						.call(d3.axisBottom(x)
+							.tickFormat(d3.timeFormat("%Y")));
+
+					// Update y-axis with the new domain
+					svg.select(".y-axis")
+						.transition()
+						.duration(300)
+						.call(d3.axisRight(y)
+							.ticks(10)
+							.tickFormat(d => {
+								if (d <= 0) return "";
+								return d3.format("d")(d);
+							}));
+
+					// Update the table data when the slider changes
+					const tableRows = document.querySelectorAll('#data-table-body tr');
+					tableRows.forEach(row => {
+						const publishYear = new Date(row.querySelector('td:nth-child(3)').textContent);
+						if (publishYear >= val[0] && publishYear <= val[1]) {
+							row.style.display = "table-row"; // Show rows within the selected range
+						} else {
+							row.style.display = "none"; // Hide rows outside the selected range
+						}
+					});
 				});
 			});
-		});
-	</script>
+		</script>
 
-	<!-- script untuk piechart biblio -->
-	<!-- <script>
+		<!-- script untuk piechart biblio -->
+		<!-- <script>
 		fetch('backend/piebiblio.php')
 			.then(response => response.json())
 			.then(data => {
@@ -1147,7 +1206,7 @@ include('backend/config.php');
 			.catch(error => console.error(error));
 	</script> -->
 
-	<!-- script iseng -->
+		<!-- script iseng -->
 		<!-- <script>
 		var dataa = [
 			{ year: 1986, indexGain: 14.50, name: 'Book A' },
@@ -1230,21 +1289,21 @@ include('backend/config.php');
 	</script> -->
 
 
-	
 
 
-	<!-- Required vendors -->
-	<script data-cfasync="false" src="../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
-	<script src="vendor/global/global.min.js"></script>
-	<script src="vendor/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
 
-	<script src="js/dashboard/dashboard-1.js"></script>
+		<!-- Required vendors -->
+		<script data-cfasync="false" src="../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+		<script src="vendor/global/global.min.js"></script>
+		<script src="vendor/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
 
-	<script src="vendor/owl-carousel/owl.carousel.js"></script>
-	<script src="js/custom.min.js"></script>
-	<script src="js/deznav-init.js"></script>
-	<script src="js/demo.js"></script>
-	<script src="js/styleSwitcher.js"></script>
+		<script src="js/dashboard/dashboard-1.js"></script>
+
+		<script src="vendor/owl-carousel/owl.carousel.js"></script>
+		<script src="js/custom.min.js"></script>
+		<script src="js/deznav-init.js"></script>
+		<script src="js/demo.js"></script>
+		<script src="js/styleSwitcher.js"></script>
 
 </body>
 

@@ -631,13 +631,159 @@ include('../backend/config.php');
 												</div>
 											</div>
 										</div>
+
 										<div class="d-flex mr-2">
-											<button type="button" class="btn btn-primary mb-2 mr-2" data-toggle="modal"
+
+											<!-- codingan baru -->
+											<button id="open_modal_button" class="btn btn-primary mb-2 mr-2" data-toggle="modal"
+												data-target="#fileModal">Import Excel</button>
+
+											<div id="fileModal" class="modal" tabindex="-1" role="dialog">
+												<div class="modal-dialog" role="document">
+													<div class="modal-content">
+														<div class="modal-header">
+															<h5 class="modal-title">Pilih File Excel</h5>
+															<button type="button" class="close" data-dismiss="modal"
+																aria-label="Close">
+																<span aria-hidden="true">&times;</span>
+															</button>
+														</div>
+														<div class="modal-body">
+															<input type="file" id="modal_excel_file_input"
+																accept=".xls, .xlsx" class="form-control">
+														</div>
+														<div class="modal-footer">
+															<button type="button" class="btn btn-secondary"
+																data-dismiss="modal">Close</button>
+															<button id="import_button_modal"
+																class="btn btn-primary">Import</button>
+														</div>
+													</div>
+												</div>
+											</div>
+
+											<script>
+												document.getElementById('import_button_modal').addEventListener('click', function () {
+													var modalExcelFileInput = document.getElementById('modal_excel_file_input');
+													var excelFile = modalExcelFileInput.files[0];
+
+													if (!excelFile) {
+														alert('Pilih file Excel terlebih dahulu.');
+														return;
+													}
+
+													// Tempatkan kode untuk mengirim file dan melakukan import di sini
+													// Gunakan fetch atau cara lain sesuai kebutuhan
+
+													// Simpan file yang dipilih ke dalam FormData
+													var formData = new FormData();
+													formData.append('excel_file', excelFile);
+
+													// Kirim data ke server
+													fetch('http://localhost:8080/test/perpustakaan/dashboard/backend/importexcel.php', {
+															method: 'POST',
+															body: formData
+														})
+														.then(response => response.json())
+														.then(data => {
+															if (data.error) {
+																alert('Error: ' + data.error);
+															} else {
+																alert('Sukses: ' + data.message);
+																modalExcelFileInput.value =
+																''; // Bersihkan input file modal setelah berhasil import
+																$('#fileModal').modal('hide'); // Sembunyikan modal setelah import
+																location.reload(); // Refresh halaman
+															}
+														})
+														.catch(error => {
+															console.error('Error:', error);
+														});
+												});
+											</script>
+
+											<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+											<script
+												src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js">
+											</script>
+											<script
+												src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js">
+											</script>
+
+
+
+
+											<button id="open_csv_modal_button" class="btn btn-primary mb-2 mr-2"
+												data-toggle="modal" data-target="#csvModal">Import Csv</button>
+
+											<!-- Modal CSV -->
+											<div id="csvModal" class="modal" tabindex="-1" role="dialog">
+												<div class="modal-dialog" role="document">
+													<div class="modal-content">
+														<div class="modal-header">
+															<h5 class="modal-title">Pilih File CSV</h5>
+															<button type="button" class="close" data-dismiss="modal"
+																aria-label="Close">
+																<span aria-hidden="true">&times;</span>
+															</button>
+														</div>
+														<div class="modal-body">
+															<input type="file" id="modal_csv_file_input" accept=".csv"
+																class="form-control">
+														</div>
+														<div class="modal-footer">
+															<button type="button" class="btn btn-secondary"
+																data-dismiss="modal">Close</button>
+															<button id="import_button_csv_modal"
+																class="btn btn-primary">Import</button>
+														</div>
+													</div>
+												</div>
+											</div>
+
+											<script>
+												document.getElementById('import_button_csv_modal').addEventListener('click', function () {
+													var modalCSVFileInput = document.getElementById('modal_csv_file_input');
+													var csvFile = modalCSVFileInput.files[0];
+
+													if (!csvFile) {
+														alert('Pilih file CSV terlebih dahulu.');
+														return;
+													}
+
+													// Mengirim data ke server dengan fetch
+													var formData = new FormData();
+													formData.append('csv_file', csvFile);
+
+													fetch('http://localhost:8080/test/perpustakaan/dashboard/backend/importcsv.php', {
+															method: 'POST',
+															body: formData
+														})
+														.then(response => response.json())
+														.then(data => {
+															if (data.error) {
+																alert('Error: ' + data.error);
+															} else {
+																alert('Sukses: ' + data.message);
+																modalCSVFileInput.value =
+																''; // Bersihkan input file modal setelah berhasil import
+																location.reload(); // Refresh halaman
+															}
+														})
+														.catch(error => {
+															console.error('Error:', error);
+														});
+												});
+											</script>
+
+
+											<!-- codingan lama -->
+											<button type="button" class="btn btn-primary mb-2 mr-5" data-toggle="modal"
 												data-target="#basicModal">Import sql
 											</button>
-											<button type="button" class="btn btn-primary mb-2 mr-5" data-toggle="modal"
+											<!-- <button type="button" class="btn btn-primary mb-2 mr-5" data-toggle="modal"
 												data-target="#basicModal1">Import excel
-											</button>
+											</button> -->
 											<div class="d-flex flex-row">
 												<a href="http://localhost:8080/test/perpustakaan/admin/modules/bibliography/Apisql.php"
 													class="btn btn-primary mb-2 mr-2" role="button"
@@ -645,8 +791,8 @@ include('../backend/config.php');
 													sql</a>
 											</div>
 											<div class="d-flex flex-row">
-												<a href="exportexcel.php" class="btn btn-primary mb-2 mr-2" role="button"
-													aria-pressed="true">Export
+												<a href="exportexcel.php" class="btn btn-primary mb-2 mr-2"
+													role="button" aria-pressed="true">Export
 													excel</a>
 											</div>
 											<div class="d-flex flex-row">
