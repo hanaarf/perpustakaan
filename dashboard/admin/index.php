@@ -635,8 +635,8 @@ include('../backend/config.php');
 										<div class="d-flex mr-2">
 
 											<!-- codingan baru -->
-											<button id="open_modal_button" class="btn btn-primary mb-2 mr-2" data-toggle="modal"
-												data-target="#fileModal">Import Excel</button>
+											<button id="open_modal_button" class="btn btn-primary mb-2 mr-2"
+												data-toggle="modal" data-target="#fileModal">Import Excel</button>
 
 											<div id="fileModal" class="modal" tabindex="-1" role="dialog">
 												<div class="modal-dialog" role="document">
@@ -691,7 +691,7 @@ include('../backend/config.php');
 															} else {
 																alert('Sukses: ' + data.message);
 																modalExcelFileInput.value =
-																''; // Bersihkan input file modal setelah berhasil import
+																	''; // Bersihkan input file modal setelah berhasil import
 																$('#fileModal').modal('hide'); // Sembunyikan modal setelah import
 																location.reload(); // Refresh halaman
 															}
@@ -766,7 +766,7 @@ include('../backend/config.php');
 															} else {
 																alert('Sukses: ' + data.message);
 																modalCSVFileInput.value =
-																''; // Bersihkan input file modal setelah berhasil import
+																	''; // Bersihkan input file modal setelah berhasil import
 																location.reload(); // Refresh halaman
 															}
 														})
@@ -1185,6 +1185,39 @@ include('../backend/config.php');
 		let data; // Menyimpan data dari database
 
 		// menampilkan data tabel dari database
+		// 	fetch('../backend/grafik.php')
+		// 		.then(response => response.json())
+		// 		.then(data => {
+		// 			const dataDetails = data.details;
+		// 			const tableBody = document.getElementById('data-table-body');
+
+		// 			// Hapus semua baris yang ada di dalam tabel
+		// 			while (tableBody.firstChild) {
+		// 				tableBody.removeChild(tableBody.firstChild);
+		// 			}
+
+		// 			// Loop melalui dataDetails dan tambahkan setiap entri ke dalam tabel
+		// 			dataDetails.forEach(entry => {
+		// 				const row = document.createElement('tr');
+		// 				row.innerHTML = `
+		//     <td>${entry.biblio_id}</td>
+		//     <td>${entry.title}</td>
+		//     <td>${entry.publish_year}</td>
+		// 	<td>${entry.publisher_name}</td>
+		//     <td>${entry.language_id}</td>
+		//   `;
+		// 				tableBody.appendChild(row);
+		// 			});
+		// 		})
+		// 		.catch(error => {
+		// 			console.error('Error:', error);
+		// 		});
+
+
+
+		let numDisplayedRows = 10; // Jumlah baris yang akan ditampilkan
+
+		// menampilkan data tabel dari database
 		fetch('../backend/grafik.php')
 			.then(response => response.json())
 			.then(data => {
@@ -1196,16 +1229,20 @@ include('../backend/config.php');
 					tableBody.removeChild(tableBody.firstChild);
 				}
 
-				// Loop melalui dataDetails dan tambahkan setiap entri ke dalam tabel
-				dataDetails.forEach(entry => {
+				// Batasi jumlah data yang akan ditampilkan menjadi 10 baris terbaru
+				const start = Math.max(0, dataDetails.length - numDisplayedRows);
+				const displayedData = dataDetails.slice(start);
+
+				// Loop melalui dataDetails yang telah dibatasi dan tambahkan setiap entri ke dalam tabel
+				displayedData.forEach(entry => {
 					const row = document.createElement('tr');
 					row.innerHTML = `
-        <td>${entry.biblio_id}</td>
-        <td>${entry.title}</td>
-        <td>${entry.publish_year}</td>
+		<td>${entry.biblio_id}</td>
+		<td>${entry.title}</td>
+		<td>${entry.publish_year}</td>
 		<td>${entry.publisher_name}</td>
-        <td>${entry.language_id}</td>
-      `;
+		<td>${entry.language_id}</td>
+	`;
 					tableBody.appendChild(row);
 				});
 			})
